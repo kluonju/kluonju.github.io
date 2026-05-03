@@ -4,12 +4,43 @@ hidemeta : true
 comments : false #optional
 ---
 
-We are focused on leveraging computational power to solve problems where electronic interactions are crucial. Due to the computational challenges posed by the complex many-body fermionic nature of electrons, these problems must be approached approximately. The chosen level of theory must balance accuracy with the feasibility of completing the task within a reasonable timeframe and resource constraints.
+<section class="lab-panel lab-panel-muted">
+  <p class="lab-eyebrow">Luo Theory Lab</p>
+  <h2>Mission</h2>
+  <p>
+    We leverage computational physics to study systems where electronic interactions
+    are essential, from standard condensed-phase materials to matter under extreme
+    temperatures and pressures. Our goal is to develop practical, accurate methods
+    that bridge fundamental theory and simulation at scale.
+  </p>
+</section>
 
-Our theoretical approaches span various levels of accuracy, including 
-- __orbital-free density functional theory__, 
-- __conventional Kohn-Sham density functional theory__, 
-- __one-body reduced density matrix functional theory__, 
-- __two-body density matrix functional theory__.
+<section class="lab-grid-2">
+  <div class="lab-panel">
+    <h3>Method development</h3>
+    <ul class="lab-list-compact">
+      <li><strong>Orbital-free density functional theory</strong></li>
+      <li><strong>Kohn-Sham density functional theory</strong></li>
+      <li><strong>One-body reduced density matrix functional theory</strong></li>
+      <li><strong>Two-body density matrix functional theory</strong></li>
+    </ul>
+  </div>
+  <div class="lab-panel">
+    <h3>Scientific scope</h3>
+    <p>
+      We investigate materials containing nearly all stable elements in the periodic
+      table, spanning broad thermodynamic ranges: from near 0 K to warm/hot dense
+      regimes and from ambient pressure to multi-TPa conditions.
+    </p>
+  </div>
+</section>
 
-We work with materials composed of nearly all stable atoms from the periodic table, under a wide range of thermodynamic conditions—from absolute zero up to 1,000,000,000 Kelvin, and from 0 GPa to thousands of GPa in pressure. Each temperature requires rigorous numerical testing to ensure convergence, necessitating expertise in pseudopotentials, basis sets, and k-point grids within our group.
+<section class="lab-panel">
+  <h3>Computational strategy</h3>
+  <p>
+    Because electronic many-body effects are computationally demanding, we design
+    approximations that balance predictive accuracy with feasible runtime. We place
+    strong emphasis on numerical reliability through robust pseudopotentials, basis
+    convergence, k-point sampling, and high-throughput validation workflows.
+  </p>
+</section>

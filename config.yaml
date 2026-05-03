@@ -1,5 +1,5 @@
 baseURL: "https://kluophysics.github.io/"
-title:  Luo's Theory Lab
+title: Luo Theory Lab
 pagerSize: 5
 theme: PaperMod
 
@@ -16,7 +16,7 @@ minify:
 
 languages:
   en:
-    languageName: "English"
+    label: "English"
     weight: 1
     taxonomies:
       category: categories
@@ -51,7 +51,7 @@ languages:
         # - identifier: Software
         #   name: Software
         #   url: /Software/
-          weight: 70
+        #   weight: 70
         - identifier: Blog
           name: Blog
           url: /posts/
@@ -75,9 +75,9 @@ languages:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "![Alt text](./images/njust-logo.jpeg) Luo's Theory Lab"
-  description: "Research pages for Kai Luo plus ideas, plans, notes, thoughts, blogs, pictures..."
-  keywords: [Blog, Portfolio, Research, Physics]
+  title: "Luo Theory Lab"
+  description: "Computational electronic-structure theory, methods, and materials research."
+  keywords: [Research, Physics, Electronic Structure, Computational Materials]
   author: Kai Luo
   # author: ["Me", "You"] # multiple authors
   images: ["./images/njust-logo.jpeg"]
@@ -104,7 +104,7 @@ params:
   tocopen: false
 
   mainSections:
-    - "blog"
+    - "posts"
     # - "posts/math"
     # - 
     # - docs
@@ -120,15 +120,13 @@ params:
     # safari_pinned_tab: "<link / abs url>"
 
   label:
-    # text: "Luo's Theory Lab"
-    # icon: ./static/images/njust-logo.jpeg
-    # icon: ./static/images/welcome0.png
-    # iconHeight: 35
-    # iconWidth: 35
+    text: "Luo Theory Lab"
+    icon: "/images/njust-logo.jpeg"
+    iconHeight: 34
 
   # profile-mode
   profileMode:
-    enabled: true #false # needs to be explicitly set
+    enabled: false #false # needs to be explicitly set
     title: __仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。__
     subtitle: "--晋·王羲之《兰亭集序》"
     imageUrl: "images/welcome0.png"
@@ -141,17 +139,6 @@ params:
         url: posts/
       - name: Archive
         url: archives/
-
-  # home-info mode
-  homeInfoParams:
-    Title: "Welcome to Luo's Theory Lab"
-    Content:  '
-    __仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。__
-     <div style="text-align: right;"> <br> --- 晋·王羲之《兰亭集序》</div>
-
-    ![欢迎](images/welcome.png)'
-   
-
 
   # socialIcons:
   #   - name: x
@@ -207,10 +194,7 @@ markup:
     guessSyntax: true
     lineNos: true
     style: monokai
-
-markup:
   defaultMarkdownHandler: goldmark
-markup:
   goldmark:
     duplicateResourceFiles: false
     extensions:
@@ -263,9 +247,9 @@ markup:
       wrapStandAloneImageWithinParagraph: true
     renderHooks:
       image:
-        enableDefault: false
+        useEmbedded: never
       link:
-        enableDefault: false
+        useEmbedded: never
     renderer:
       hardWraps: false
       unsafe: true # Kai Luo modified
