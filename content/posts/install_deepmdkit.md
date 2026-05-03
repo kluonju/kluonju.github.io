@@ -1,3 +1,8 @@
+---
+title: "Installation of DeePMD-kit"
+summary: "Installation transcript and notes for DeePMD-kit 3.1.0 on Linux."
+---
+
 kluo@local: /home/kluo/work/apps
 $ bash deepmd-kit-3.1.0-cpu-Linux-x86_64.sh 
 
