@@ -9,7 +9,7 @@ comments : false #optional
   <p class="lab-eyebrow">People</p>
   <h2>Principal Investigator</h2>
   <div class="lab-person-card">
-    <img src="./kluo_photo.png" alt="Kai Luo" width="150" height="200" />
+    <img src="./kluo.png" alt="Kai Luo" width="150" height="200" />
     <p><strong>Kai Luo (罗凯)</strong></p>
     <p><strong>Role:</strong> Principal Investigator</p>
     <p>
@@ -20,19 +20,35 @@ comments : false #optional
   </div>
 </section>
 
-<h2>Current Group Members</h2>
+<h2>Graduate</h2>
 <section class="lab-grid-2">
   <div class="lab-person-card">
-    <img src="./xylong_photo.jpg" alt="Xuyang Long" width="150" height="200" />
+    <img src="./xylong.jpg" alt="Xuyang Long" width="150" height="200" />
     <p><strong>Xuyang Long (龙旭扬)</strong></p>
     <p><strong>Program:</strong> Graduate student (2024.09 - present)</p>
     <p><strong>Focus:</strong> Exchange-correlation functionals and deorbitalization</p>
+  </div>
+</section>
+
+<h2>Undergraduate</h2>
+<section class="lab-grid-2">
+  <div class="lab-person-card">
+    <img src="./pzluo.jpg" alt="Peizhe Luo" width="150" height="200" />
+    <p><strong>Peizhe Luo (罗培哲) </strong></p>
+    <p><strong>Program:</strong> Undergraduate researcher (2026.02 - present)</p>
+    <p><strong>Focus:</strong> Norm conserving pseudopotential generation in atomic code</p>
   </div>
   <div class="lab-person-card">
     <img src="./wisp.jpeg" alt="Jinfan Liu" width="150" height="200" />
     <p><strong>Jinfan Liu (刘锦繁)</strong></p>
     <p><strong>Program:</strong> Undergraduate researcher (2025.1 - present)</p>
     <p><strong>Focus:</strong> ABACUS graphical user interface development</p>
+  </div>
+  <div class="lab-person-card">
+    <img src="./zywang.jpg" alt="Wang Ziyi" width="150" height="200" />
+    <p><strong>Ziyi Wang(王子怡)</strong></p>
+    <p><strong>Program:</strong> Undergraduate researcher (2026.02 - present)</p>
+    <p><strong>Focus:</strong> Reduced density matrix functional theory for atoms </p>
   </div>
 </section>
 

@@ -1,129 +1,47 @@
 ---
-title: "List of Publications"
-hidemeta : true
-comments : false #optional
+title: "Publications"
+description: "Peer-reviewed articles and preprints (aligned with Google Scholar). Links to BibTeX and PDFs where available."
+hidemeta: true
+comments: false
 showtoc: false
 ---
 
-<!--  see https://gohugo.io/getting-started/configuration-markup/#goldmark for goldmark configuration -->
+<p class="pub-profiles">
+  <a href="https://scholar.google.com/citations?hl=en&amp;user=5byAayIAAAAJ">Google Scholar</a>
+  <span class="pub-sep" aria-hidden="true">·</span>
+  <a href="https://www.webofscience.com/wos/author/record/O-3048-2018">Web of Science</a>
+  <span class="pub-sep" aria-hidden="true">·</span>
+  <a href="https://orcid.org/0000-0002-3802-0029">ORCID</a>
+</p>
 
+<p class="pub-legend"><strong>†</strong> corresponding author · <strong>*</strong> co-first author (equal contribution)</p>
 
-You can find my publications on [GoogleScholar](https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ) | [Web of Science](https://www.webofscience.com/wos/author/record/O-3048-2018) | [ORCID](https://orcid.org/0000-0002-3802-0029).
+<p class="pub-highlights-intro">Research notes: <a href="/news/stiefel-manifold-cpc/">Stiefel manifold CPC (2025)</a> · <a href="/news/aluminum-liquid-vapor-critical-point/">Al liquid–vapor critical point (<em>Phys. Rev. B</em>, 2026)</a> · <a href="/news/">All news</a></p>
 
-Note: &dagger; denotes corresponding author, and \* denotes co-first author (meaning contributed equally to the work).
+## After joining NJUST
 
-## After Joining NJUST
+1. <span id="al-cp-prb" class="pub-item-anchor" aria-hidden="true"></span>[Location of the liquid-vapor critical point in aluminum](https://arxiv.org/abs/2604.10561), Xuyang Long and **Kai Luo**, **Phys. Rev. B** (2026); [arXiv:2604.10561](https://arxiv.org/abs/2604.10561) — [News](/news/aluminum-liquid-vapor-critical-point/) · [bibtex](./Long2026_PRB.bib) · [PDF](./Long2026_PRB.pdf) · [PDF (arXiv)](https://arxiv.org/pdf/2604.10561.pdf)
+1. [Pressure dependence of liquid iron viscosity from machine-learning molecular dynamics](https://doi.org/10.1029/2025GC012684), **Kai Luo**<sup>†</sup>, Xuyang Long, and R. E. Cohen, **Geochemistry, Geophysics, Geosystems** 27 (4), e2025GC012684 (2026); [arXiv:2506.21626](https://arxiv.org/abs/2506.21626) — [bibtex](./Luo2026_G3_FeViscosity.bib) · [PDF](https://arxiv.org/pdf/2506.21626.pdf)
+1. <span id="stiefel-cpc" class="pub-item-anchor" aria-hidden="true"></span>[Direct minimization on the complex Stiefel manifold in Kohn–Sham density functional theory for finite and extended systems](https://doi.org/10.1016/j.cpc.2025.109596), **Kai Luo**<sup>†</sup>, Tingguang Wang, and Xinguo Ren, **Computer Physics Communications** 312, 109596 (2025); [arXiv:2412.18807](https://arxiv.org/abs/2412.18807) — [News](/news/stiefel-manifold-cpc/) · [rebuttal](../posts/data/reply_COMPHY-D-24-00377.pdf) · [reply1](../posts/data/reply_COMPHY-D-24-00757_R1.pdf) · [reply2](../posts/data/reply_COMPHY-D-24-00757_R2.pdf) · [reply3](../posts/data/reply_COMPHY-D-24-00757_R3.pdf) · [bibtex](./Luo2025_CPC.bib) · [PDF](./Luo2025_CPC.pdf)
+1. [Semilocal kinetic energy density functionals on atoms and diatoms](https://doi.org/10.1021/acs.jctc.4c00532), Tingwei Wang, **Kai Luo**<sup>†</sup>, and Ruifeng Lu, **Journal of Chemical Theory and Computation** 20 (12), 5176–5187 (2024) — [bibtex](./Wang2024_JCTC.bib) · [PDF](https://pubs.acs.org/doi/pdf/10.1021/acs.jctc.4c00532)
+1. [Orbital-free density functional theory: An attractive electronic structure method for large-scale first-principles simulations](https://doi.org/10.1021/acs.chemrev.2c00758), Wenhui Mi<sup>†</sup>, **Kai Luo**<sup>†</sup>, S. B. Trickey<sup>†</sup>, Michele Pavanello<sup>†</sup>, **Chemical Reviews** 123 (21), 12039–12104 (2023) — [bibtex](./Mi2023_ChemRev.bib) · [PDF](https://pubs.acs.org/doi/pdf/10.1021/acs.chemrev.2c00758)
+1. [First-principles thermal equation of state of fcc iridium](https://doi.org/10.1103/PhysRevB.107.014106), **Kai Luo**<sup>†</sup>, Ruifeng Lu, and R. E. Cohen, **Physical Review B** 107, 014106 (2023) — [bibtex](./Luo2023_PRB.bibtex) · [PDF](https://journals.aps.org/prb/pdf/10.1103/PhysRevB.107.014106)
+1. [Giant bipolar unidirectional photomagnetoresistance](https://doi.org/10.1073/pnas.2115939119), Yucheng Jiang<sup>*†</sup>, Anpeng He<sup>*</sup>, **Kai Luo**<sup>*</sup>, Jinlei Zhang, Guozhen Liu, Run Zhao, Qing Zhang, Zhuo Wang, Chen Zhao, Lin Wang, Yaping Qi, Ju Gao, Kian Ping Loh, Andrew T. S. Wee, and Cheng-Wei Qiu<sup>†</sup>, **Proceedings of the National Academy of Sciences** 119 (27), e2115939119 (2023) — [bibtex](./Jiang2023_PNAS.bib) · [PDF](https://www.pnas.org/doi/pdf/10.1073/pnas.2115939119)
+1. [Ultrahigh-pressure disordered eight-coordinated phase of Mg<sub>2</sub>GeO<sub>4</sub>: analogue for super-Earth mantles](https://doi.org/10.1073/pnas.2114424119), Rajkrishna Dutta<sup>†</sup>, Sally June Tracy, Ronald E. Cohen, Francesca Miozzi, **Kai Luo**, Jing Yang, Pamela C. Burnley, Dean Smith, Yue Meng, Stella Chariton, Vitali B. Prakapenka, and Thomas S. Duffy, **Proceedings of the National Academy of Sciences** 119 (8), e2114424119 (2022) — [bibtex](./Dutta2022_PNAS.bib) · [PDF](https://www.pnas.org/doi/pdf/10.1073/pnas.2114424119)
+1. [Thermal conductivity of Fe–Si alloys and thermal stratification in Earth’s core](https://doi.org/10.1073/pnas.2119001119), Youjun Zhang<sup>*</sup>, **Kai Luo**<sup>*</sup>, Mingqiang Hou<sup>*</sup>, Peter Driscoll, Nilesh P. Salke, Ján Minár, Vitali B. Prakapenka, Eran Greenberg, Russell J. Hemley<sup>†</sup>, R. E. Cohen<sup>†</sup>, and Jung-Fu Lin<sup>†</sup>, **Proceedings of the National Academy of Sciences** 119 (1), e2119001119 (2022) — [bibtex](./Zhang2022_PNAS.bib) · [PDF](https://www.pnas.org/doi/pdf/10.1073/pnas.2119001119)
 
+## Before joining NJUST
 
-1. [Pressure dependence of liquid iron viscosity from machine-learning molecular dynamics
-](https://arxiv.org/abs/2506.21626),
- **Kai Luo**<sup>&dagger;</sup>,  Xuyang Long, and R.E. Cohen, **arXiv**  arXiv:2506.21626 (2025)
-
-
-1. [Direct minimization on the complex Stiefel manifold in Kohn-Sham density
-functional theory for finite and extended systems](https://doi.org/10.1016/j.cpc.2025.109596),
- **Kai Luo**<sup>&dagger;</sup>,  Tingguang Wang, and Xinguo Ren, **Computer Physics Communications**  312, 109596 (2025), 
- arXiv:2412.18807
- [[rebuttal](../posts/data/reply_COMPHY-D-24-00377.pdf) 
- [[reply1]](../posts/data/reply_COMPHY-D-24-00757_R1.pdf) 
- [[reply2]](../posts/data/reply_COMPHY-D-24-00757_R2.pdf) 
- [[reply3]](../posts/data/reply_COMPHY-D-24-00757_R3.pdf) 
- [[bibtex]](./Luo2025_CPC.bib) [[PDF]](./Luo2025_CPC.pdf)
-
-
-  <!-- [[bibtex]](./Wang2024_JCTC.bib) [[PDF]]() -->
-
-1. [Semilocal Kinetic Energy Density Functionals on Atoms and Diatoms](https://doi.org/10.1021/acs.jctc.4c00532),
-Tingwei Wang,   **Kai Luo**<sup>&dagger;</sup>, and Ruifeng Lu, **Journal of Chemical Theory and Computation**  20 (12), 5176-5187 (2024) 
-  [[bibtex]](./Wang2024_JCTC.bib) [[PDF]]()
-
-1. [Orbital-free density functional theory: An attractive electronic structure method for large-scale first-principles simulations](https://doi.org/10.1021/acs.chemrev.2c00758),
-Wenhui Mi<sup>&dagger;</sup>,   **Kai Luo**<sup>&dagger;</sup>, SB Trickey<sup>&dagger;</sup>, Michele Pavanello <sup>&dagger;</sup>, **Chemical Reviews** 123 (21), 12039-12104 (2023) [[bibtex]](./Mi2023_ChemRev.bib) [[PDF]]()
-
-1. [First-principles thermal equation of state of fcc iridium](https://doi.org/10.1103/PhysRevB.107.014106),
- **Kai Luo**<sup>&dagger;</sup>, Ruifeng Lu, RE Cohen, **Physical Review B** 107, 014106 (2023) [[bibtex]](./Luo2023_PRB.bibtex) [[PDF]]()
-
-1. [Giant bipolar unidirectional photomagnetoresistance](https://doi.org/10.1073/pnas.2115939119),
- Yucheng Jiang<sup>\*&dagger;</sup>, Anpeng He<sup>\*</sup>,   **Kai Luo**<sup>\*</sup>, Jinlei Zhang, Guozhen Liu, Run Zhao, Qing Zhang, Zhuo Wang, Chen Zhao, Lin Wang, Yaping Qi, Ju Gao, Kian Ping Loh, Andrew TS Wee, Cheng-Wei Qiu <sup>&dagger;</sup>, **Proceedings of the National Academy of Sciences**  119 (27) e2115939119 (2023)  [[bibtex]](./Jiang2023_PNAS.bib) [[PDF]]()
-   
-1. [Ultrahigh-pressure disordered eight-coordinated phase of Mg2GeO4: Analogue for super-Earth mantles](https://doi.org/10.1073/pnas.2114424119),
- Rajkrishna Dutta<sup>&dagger;</sup>, Sally June Tracy, Ronald E Cohen, Francesca Miozzi,   **Kai Luo**, Jing Yang, Pamela C Burnley, Dean Smith, Yue Meng, Stella Chariton, Vitali B Prakapenka, Thomas S Duffy, **Proceedings of the National Academy of Sciences** 119(8), e2114424119. (2022) 
- [[bibtex]](./Dutta2022_PNAS.bib) [[PDF]]()
-
-1. [Thermal conductivity of Fe-Si alloys and thermal stratification in Earth’s core](https://doi.org/10.1073/pnas.2119001119), 
-Youjun Zhang<sup>\*</sup>,   **Kai Luo** <sup>\*</sup>, Mingqiang Hou<sup>\*</sup>, Peter Driscoll, Nilesh P Salke, Ján Minár, Vitali B Prakapenka, Eran Greenberg, Russell J Hemley<sup>&dagger;</sup>, RE Cohen<sup>&dagger;</sup>, Jung-Fu Lin <sup>&dagger;</sup>
- **Proceedings of the National Academy of Sciences** 119(1), e2119001119 (2022) 
- [[bibtex]](./Zhang2022_PNAS.bib) [[PDF]]()
-   
-
-<!-- 2. **Machine Learning in Data Science**
-   - *Authors:* Alice Johnson, Bob Williams
-   - *Publication Details:* Data Science Journal, 2022
-   - [PDF](/path/to/publication2.pdf) | [Link](https://example.com/pub2)
-
-3. **Advanced Techniques in Computational Biology**
-   - *Authors:* Charlie Brown, Diana Prince
-   - *Publication Details:* Bioinformatics Review, 2021
-   - [PDF](/path/to/publication3.pdf) | [Link](https://example.com/pub3)
-
-4. **Cybersecurity: Challenges and Solutions**
-   - *Authors:* Eve White, Frank Black
-   - *Publication Details:* Security Journal, 2020
-   - [PDF](/path/to/publication4.pdf) | [Link](https://example.com/pub4)
-
-5. **Data Visualization: Tools and Techniques**
-   - *Authors:* Jane Doe, Diana Prince
-   - *Publication Details:* Visualization Magazine, 2019
-   - [PDF](/path/to/publication5.pdf) | [Link](https://example.com/pub5) -->
-
-<!-- Add more publications as needed -->
----
-## Before Joining NJUST
-
-1. [Local pressure for inhomogeneous fluids](https://doi.org/10.1002/aic.17037),
-    James Dufty<sup>&dagger;</sup>, Jeffrey Wrighton,   **Kai Luo**
-    **AIChE Journal** 67 (10), e17323 (2021)
-    [[bibtex]](./Dufty2021_AICHE.bib) [[PDF]]()
-
-1. [Two-temperature warm dense hydrogen as a test of quantum protons driven by orbital-free density functional theory electronic forces](https://doi.org/10.1063/5.0025164),
-    Dongdong Kang<sup>&dagger;</sup>,   **Kai Luo**, Keith Runge, Samuel B Trickey
-    **Matter and Radiation at Extremes** 5 (6), 064403 (2020)
-    [[bibtex]](./Kang2020_MRE.bib) [[PDF]]()
-
-1. [Generalized hydrodynamics revisited](https://doi.org/10.1103/PhysRevResearch.2.023036),
-   James Dufty,   **Kai Luo**<sup>&dagger;</sup>, Jeffrey Wrighton
-   **Physical Review Research**  2 (2), 023036 (2020)
-    [[bibtex]](./Dufty2020_PRR.bib) [[PDF]]() [[Supp. PDF]](./SupMat_resub.pdf)
-
-
-1. [Towards accurate orbital-free simulations: A generalized gradient approximation for the noninteracting free energy density functional](https://doi.org/10.1103/PhysRevB.101.075116),
-     **Kai Luo**<sup>&dagger;</sup>, Valentin V. Karasiev<sup>&dagger;</sup>, and Samuel B. Trickey<sup>&dagger;</sup>
-    **Physical Review B** 101 (7), 075116 (2020)
-    [[bibtex]](./Luo2020_PRB.bib) [[PDF]]() [[Supp. PDF]](./LuoPRB_SuppMaterials.pdf)
-
-
-1. [A simple generalized gradient approximation for the noninteracting kinetic energy density functional](https://doi.org/10.1103/PhysRevB.98.041111),
-     **Kai Luo**<sup>&dagger;</sup>, Valentin V. Karasiev<sup>&dagger;</sup>, and Samuel B. Trickey<sup>&dagger;</sup>
-    **Physical Review B** 98, 041111(R)  (2018)
-   [[bibtex]](./Luo2018_PRB.bib) [[PDF]](./Luo2018_PRB.pdf) [[Supp. PDF]](./LKT.SuppMat.pdf)
-
-1. [Density response from kinetic theory and time-dependent density-functional theory for matter under extreme conditions](https://doi.org/10.1103/PhysRevE.98.033203),
-    James Dufty, **Kai Luo**<sup>&dagger;</sup>, and  S. B. Trickey
-      **Physical Review E**  98, 033203  (2018)
-   [[bibtex]](./Dufty2018_PRE.bib) [[PDF]](./Dufty2018_PRE.pdf)
-
-1. [Trivial constraints on orbital-free kinetic energy density functionals](https://doi.org/10.1016/j.cplett.2018.02.002)
-   **Kai Luo**<sup>&dagger;</sup>, S. B. Trickey <sup>&dagger;</sup>
-   **Chemical Physics Letters** 695, 190-193 (2018)
-    [[bibtex]](Luo2018_CPL.bib) [[PDF]](Luo2018_CPL.pdf)
-
-
-<!-- https://coderwall.com/p/hcqhja/coderwall-markdown-cheat-sheet -->
-
-<!-- ©       &copy;
-®       &reg;
-†       &dagger;
-‡       &Dagger;
-±       &plusmn;
-€       &euro;
-™       &trade; -->
+1. [Local pressure for inhomogeneous fluids](https://doi.org/10.1002/aic.17037), James Dufty<sup>†</sup>, Jeffrey Wrighton, and **Kai Luo**, **AIChE Journal** 67 (10), e17323 (2021) — [bibtex](./Dufty2021_AICHE.bib) · [PDF](https://aiche.onlinelibrary.wiley.com/doi/pdf/10.1002/aic.17037)
+1. [Two-temperature warm dense hydrogen as a test of quantum protons driven by orbital-free density functional theory electronic forces](https://doi.org/10.1063/5.0025164), Dongdong Kang<sup>†</sup>, **Kai Luo**, Keith Runge, and Samuel B. Trickey, **Matter and Radiation at Extremes** 5 (6), 064403 (2020) — [bibtex](./Kang2020_MRE.bib) · [PDF](https://pubs.aip.org/aip/mre/article-pdf/doi/10.1063/5.0025164/15786038/064403_1_online.pdf)
+1. [Generalized hydrodynamics revisited](https://doi.org/10.1103/PhysRevResearch.2.023036), James Dufty, **Kai Luo**<sup>†</sup>, and Jeffrey Wrighton, **Physical Review Research** 2 (2), 023036 (2020) — [bibtex](./Dufty2020_PRR.bib) · [PDF](https://journals.aps.org/prresearch/pdf/10.1103/PhysRevResearch.2.023036) · [Supp. PDF](./SupMat_resub.pdf)
+1. [Towards accurate orbital-free simulations: A generalized gradient approximation for the noninteracting free energy density functional](https://doi.org/10.1103/PhysRevB.101.075116), **Kai Luo**<sup>†</sup>, Valentin V. Karasiev<sup>†</sup>, and Samuel B. Trickey<sup>†</sup>, **Physical Review B** 101 (7), 075116 (2020) — [bibtex](./Luo2020_PRB.bib) · [PDF](https://journals.aps.org/prb/pdf/10.1103/PhysRevB.101.075116) · [Supp. PDF](./LuoPRB_SuppMaterials.pdf)
+1. [A simple generalized gradient approximation for the noninteracting kinetic energy density functional](https://doi.org/10.1103/PhysRevB.98.041111), **Kai Luo**<sup>†</sup>, Valentin V. Karasiev<sup>†</sup>, and Samuel B. Trickey<sup>†</sup>, **Physical Review B** 98, 041111(R) (2018) — [bibtex](./Luo2018_PRB.bib) · [PDF](./Luo2018_PRB.pdf) · [Supp. PDF](./LKT.SuppMat.pdf)
+1. [Density response from kinetic theory and time-dependent density-functional theory for matter under extreme conditions](https://doi.org/10.1103/PhysRevE.98.033203), James Dufty, **Kai Luo**<sup>†</sup>, and S. B. Trickey, **Physical Review E** 98, 033203 (2018) — [bibtex](./Dufty2018_PRE.bib) · [PDF](./Dufty2018_PRE.pdf)
+1. [Trivial constraints on orbital-free kinetic energy density functionals](https://doi.org/10.1016/j.cplett.2018.02.002), **Kai Luo**<sup>†</sup> and S. B. Trickey<sup>†</sup>, **Chemical Physics Letters** 695, 190–193 (2018) — [bibtex](./Luo2018_CPL.bib) · [PDF](./Luo2018_CPL.pdf)
+1. [On the Kubo–Greenwood model for electron conductivity](https://doi.org/10.1002/ctpp.201700102), James Dufty<sup>†</sup>, Jeffrey Wrighton, **Kai Luo**, and S. B. Trickey, **Contributions to Plasma Physics** 58 (2–3), 150–154 (2018) — [bibtex](./Dufty2018_CPP.bib) · [PDF](https://onlinelibrary.wiley.com/doi/pdf/10.1002/ctpp.201700102)
+1. [Studies of spuriously shifting resonances in time-dependent density functional theory](https://doi.org/10.1063/1.4955447), **Kai Luo**, Johanna I. Fuks, and Neepa T. Maitra, **The Journal of Chemical Physics** 145 (4), 044101 (2016) — [bibtex](./Luo2016_JCP.bib) · [PDF](https://pubs.aip.org/aip/jcp/article-pdf/doi/10.1063/1.4955447/15515441/044101_1_online.pdf)
+1. [Time-resolved spectroscopy in time-dependent density functional theory: An exact condition](https://doi.org/10.1103/PhysRevLett.114.183002), Johanna I. Fuks, **Kai Luo**, Ernesto D. Sandoval, and Neepa T. Maitra, **Physical Review Letters** 114, 183002 (2015) — [bibtex](./Fuks2015_PRL.bib) · [PDF](https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.114.183002)
+1. [*Exploring non-equilibrium dynamics in time-dependent density functional theory*](https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=5byAayIAAAAJ&amp;citation_for_view=5byAayIAAAAJ:WF5omc3nYNoC), **Kai Luo**, Ph.D. dissertation, Rutgers, The State University of New Jersey (2015) — [bibtex](./Luo2015_thesis.bib)
+1. [Kinetic and interaction components of the exact time-dependent correlation potential](https://doi.org/10.1063/1.4867002), **Kai Luo**, Johanna I. Fuks, Ernesto D. Sandoval, Peter Elliott, and Neepa T. Maitra, **The Journal of Chemical Physics** 140 (18), 18A515 (2014) — [bibtex](./Luo2014_JCP.bibtex) · [PDF](https://pubs.aip.org/aip/jcp/article-pdf/doi/10.1063/1.4867002/15481014/18a515_1_online.pdf)
+1. [Absence of dynamical steps in the exact correlation potential in the linear response regime](https://doi.org/10.1103/PhysRevA.88.042508), **Kai Luo**, Peter Elliott, and Neepa T. Maitra, **Physical Review A** 88, 042508 (2013) — [bibtex](./Luo2013_PRB.bibtex) · [PDF](https://journals.aps.org/pra/pdf/10.1103/PhysRevA.88.042508)

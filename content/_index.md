@@ -23,9 +23,9 @@ description: "Computational materials and electronic structure research."
 </section>
 
 <section class="lab-quick-links">
-  <a href="/about/">
-    <h3>About</h3>
-    <p>Mission, focus areas, and scientific philosophy.</p>
+  <a href="/news/">
+    <h3>News</h3>
+    <p>Announcements and research notes.</p>
   </a>
   <a href="/publications/">
     <h3>Publications</h3>

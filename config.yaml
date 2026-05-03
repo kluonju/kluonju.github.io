@@ -16,7 +16,6 @@ minify:
 
 languages:
   en:
-    label: "English"
     weight: 1
     taxonomies:
       category: categories
@@ -24,9 +23,9 @@ languages:
       series: series
     menu:
       main:
-        - identifier: About
-          name: About
-          url: /about/
+        - identifier: News
+          name: News
+          url: /news/
           weight: 10
         - identifier: People
           name: People
@@ -62,7 +61,7 @@ languages:
         #   weight: 80      
         - identifier: Archive
           name: Archive
-          url: /posts/archives/
+          url: /archives/
           weight: 90    
         # - identifier: Tags
         #   name: Tags
@@ -86,7 +85,7 @@ params:
   disableThemeToggle: false
 
   ShowReadingTime: true
-  ShowShareButtons: true
+  ShowShareButtons: false
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -127,13 +126,12 @@ params:
   # profile-mode
   profileMode:
     enabled: false #false # needs to be explicitly set
-    title: __仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。__
-    subtitle: "--晋·王羲之《兰亭集序》"
+    title: "Looking up, I see the immensity of the cosmos; bowing my head, I look at the multitude of the world. So I let my gaze wander and my mind roam, until I have taken in all I can see and hear—and this is true happiness."
+    subtitle: "— Wang Xizhi, Preface to the Poems Composed at the Orchid Pavilion (excerpt)"
     imageUrl: "images/welcome0.png"
     imageWidth: 600
     imageHeight: 450
-    imageTitle: "Looking up, I see the immensity of the cosmos; bowing my head, I look at the multitude of the world. 
-    The gaze flies, the heart expands, the joy of the senses can reach its peak, & indeed, this is true happiness!"
+    imageTitle: "Looking up, I see the immensity of the cosmos; bowing my head, I look at the multitude of the world. The gaze flies, the heart expands, the joy of the senses can reach its peak, and indeed, this is true happiness."
     buttons:
       - name: Blog
         url: posts/

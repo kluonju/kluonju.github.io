@@ -45,6 +45,16 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Ensure PaperMod theme
+        run: |
+          set -e
+          if [ ! -f themes/PaperMod/layouts/baseof.html ]; then
+            echo "Submodule theme missing; fetching PaperMod tarball…"
+            rm -rf themes/PaperMod
+            curl -fsSL "https://codeload.github.com/adityatelange/hugo-PaperMod/tar.gz/master" | tar xz
+            mv hugo-PaperMod-master themes/PaperMod
+          fi
+          test -f themes/PaperMod/layouts/baseof.html
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
