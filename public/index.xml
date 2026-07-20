@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Luo&#39;s Theory Lab</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Luo&#39;s Theory Lab</description>
+    <generator>Hugo -- 0.154.5</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jul 2024 20:57:58 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Riemannian Manifold</title>
+      <link>http://localhost:1313/posts/riemannian-manifold/</link>
+      <pubDate>Mon, 01 Jul 2024 20:57:58 +0800</pubDate>
+      <guid>http://localhost:1313/posts/riemannian-manifold/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;We are focused on leveraging computational power to solve problems where electronic interactions are crucial. Due to the computational challenges posed by the complex many-body fermionic nature of electrons, these problems must be approached approximately. The chosen level of theory must balance accuracy with the feasibility of completing the task within a reasonable timeframe and resource constraints.&lt;/p&gt;
+&lt;p&gt;Our theoretical approaches span various levels of accuracy, including&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;orbital-free density functional theory&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;conventional Kohn-Sham density functional theory&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;one-body reduced density matrix functional theory&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;two-body density matrix functional theory&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We work with materials composed of nearly all stable atoms from the periodic table, under a wide range of thermodynamic conditions—from absolute zero up to 1,000,000,000 Kelvin, and from 0 GPa to thousands of GPa in pressure. Each temperature requires rigorous numerical testing to ensure convergence, necessitating expertise in pseudopotentials, basis sets, and k-point grids within our group.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fall of 2024</title>
+      <link>http://localhost:1313/teaching/fall-2024/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/teaching/fall-2024/</guid>
+      <description>&lt;h2 id=&#34;syllabus&#34;&gt;Syllabus&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;syllabus_2024.pdf&#34;&gt;Download Syllabus (PDF)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Lecture Number&lt;/th&gt;
+          &lt;th&gt;Date&lt;/th&gt;
+          &lt;th&gt;Topic&lt;/th&gt;
+          &lt;th&gt;Notes (PDF)&lt;/th&gt;
+          &lt;th&gt;Slides (PDF)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Lecture 1&lt;/td&gt;
+          &lt;td&gt;Week 2&lt;/td&gt;
+          &lt;td&gt;Complex Number and Complex Function&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;lecture01.pdf&#34;&gt;Notes&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/lecture1-slides.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Lecture 2&lt;/td&gt;
+          &lt;td&gt;Week 3, Week 5&lt;/td&gt;
+          &lt;td&gt;Complex Function Integration, Cauchy Theorem, Complex Series&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;lecture02.pdf&#34;&gt;Notes&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/lecture2-slides.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Lecture 3&lt;/td&gt;
+          &lt;td&gt;Week 6&lt;/td&gt;
+          &lt;td&gt;Residual Theorem and Applications, Feynman Techniques&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;lecture03.pdf&#34;&gt;Notes&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/lecture3-slides.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;homework-assignments&#34;&gt;Homework Assignments&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Homework Number&lt;/th&gt;
+          &lt;th&gt;Due Date&lt;/th&gt;
+          &lt;th&gt;Assignment (PDF)&lt;/th&gt;
+          &lt;th&gt;Solution (PDF)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Homework 1&lt;/td&gt;
+          &lt;td&gt;2024-10-08&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;hw1.pdf&#34;&gt;Assignment&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/homework1-solution.pdf&#34;&gt;Solution&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Homework 2&lt;/td&gt;
+          &lt;td&gt;2024-10-15&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;hw2.pdf&#34;&gt;Assignment&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/homework2-solution.pdf&#34;&gt;Solution&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Homework 3&lt;/td&gt;
+          &lt;td&gt;2024-10-22&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;hw3.pdf&#34;&gt;Assignment&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&#34;http://localhost:1313/path/to/homework3-solution.pdf&#34;&gt;Solution&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;contact-information&#34;&gt;Contact Information&lt;/h2&gt;
+&lt;p&gt;If you have any questions, feel free to contact the instructor at &lt;a href=&#34;mailto:instructor@example.com&#34;&gt;instructor@example.com&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Group Members</title>
+      <link>http://localhost:1313/people/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/people/</guid>
+      <description>&lt;h2 id=&#34;principal-investigator&#34;&gt;Principal Investigator&lt;/h2&gt;
+&lt;p&gt;&lt;figure&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./kluo_photo.png&#34;
+         alt=&#34;Principal Investigator&#34; width=&#34;150&#34; height=&#34;200&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;strong&gt;Kai Luo （罗凯）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Role:  Principal Investigator&lt;/li&gt;
+&lt;li&gt;Research Interests: Orbital-free density functional theory, density functional theory, reduced density matrix functional theory, warm dense matter&lt;/li&gt;
+&lt;li&gt;Contact: kluo[at]njust.edu.cn&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;group-members&#34;&gt;Group Members&lt;/h2&gt;
+&lt;h3 id=&#34;graduate&#34;&gt;Graduate&lt;/h3&gt;
+&lt;p&gt;&lt;figure&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./xylong_photo.jpg&#34;
+         alt=&#34;Master Students&#34; width=&#34;150&#34; height=&#34;200&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;strong&gt;Xuyang Long （龙旭扬）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Year: 2024.09 &amp;ndash;&lt;/li&gt;
+&lt;li&gt;Research Area: exchange-correlation functional, deorbitalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;undergraduate&#34;&gt;Undergraduate&lt;/h2&gt;
+&lt;p&gt;&lt;figure&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./wisp.jpeg&#34;
+         alt=&#34;Undergraduate Students&#34; width=&#34;150&#34; height=&#34;200&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;strong&gt;Jinfan Liu（刘锦繁）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Year: 2025.1 &amp;ndash;&lt;/li&gt;
+&lt;li&gt;Research Area: ABACUS graphical user interface&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;alumni&#34;&gt;Alumni&lt;/h2&gt;
+&lt;h3 id=&#34;graduate-1&#34;&gt;Graduate&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;王廷伟 (2020.9&amp;ndash;2024.6) 深圳市新凯来技术有限公司
+&lt;ul&gt;
+&lt;li&gt;论文《单双原子分子体系中半局域动能密度泛函的比较研究》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;王庭广 (2022.9&amp;ndash;2025.6)
+&lt;ul&gt;
+&lt;li&gt;论文《基于Stiefel流形的Kohn-Sham能量泛函最小化方法研究: 有限体系与扩展体系的应用》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;沈军 (2022.09 &amp;ndash; 2025.6)
+&lt;ul&gt;
+&lt;li&gt;论文《基于第一性原理计算氧化锌岩盐相的状态方程和电导率》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;undergraduate-1&#34;&gt;Undergraduate&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>List of Publications</title>
+      <link>http://localhost:1313/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/</guid>
+      <description>&lt;p&gt;You can find my publications on &lt;a href=&#34;https://scholar.google.com/citations?hl=en&amp;amp;user=5byAayIAAAAJ&#34;&gt;GoogleScholar&lt;/a&gt; | &lt;a href=&#34;https://www.webofscience.com/wos/author/record/O-3048-2018&#34;&gt;Web of Science&lt;/a&gt; | &lt;a href=&#34;https://orcid.org/0000-0002-3802-0029&#34;&gt;ORCID&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note: † denotes corresponding author, and * denotes co-first author (meaning contributed equally to the work).&lt;/p&gt;
+&lt;h2 id=&#34;after-joining-njust&#34;&gt;After Joining NJUST&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/2506.21626&#34;&gt;Pressure dependence of liquid iron viscosity from machine-learning molecular dynamics
+&lt;/a&gt;,
+&lt;strong&gt;Kai Luo&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;†&lt;!-- raw HTML omitted --&gt;,  Xuyang Long, and R.E. Cohen, &lt;strong&gt;arXiv&lt;/strong&gt;  arXiv:2506.21626 (2025)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.1016/j.cpc.2025.109596&#34;&gt;Direct minimization on the complex Stiefel manifold in Kohn-Sham density
+functional theory for finite and extended systems&lt;/a&gt;,
+&lt;strong&gt;Kai Luo&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;†&lt;!-- raw HTML omitted --&gt;,  Tingguang Wang, and Xinguo Ren, &lt;strong&gt;Computer Physics Communications&lt;/strong&gt;  312, 109596 (2025),
+arXiv:2412.18807
+[&lt;a href=&#34;../posts/data/reply_COMPHY-D-24-00377.pdf&#34;&gt;rebuttal&lt;/a&gt;
+&lt;a href=&#34;../posts/data/reply_COMPHY-D-24-00757_R1.pdf&#34;&gt;[reply1]&lt;/a&gt;
+&lt;a href=&#34;../posts/data/reply_COMPHY-D-24-00757_R2.pdf&#34;&gt;[reply2]&lt;/a&gt;
+&lt;a href=&#34;../posts/data/reply_COMPHY-D-24-00757_R3.pdf&#34;&gt;[reply3]&lt;/a&gt;
+&lt;a href=&#34;./Luo2025_CPC.bib&#34;&gt;[bibtex]&lt;/a&gt; &lt;a href=&#34;./Luo2025_CPC.pdf&#34;&gt;[PDF]&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research</title>
+      <link>http://localhost:1313/research/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Talks</title>
+      <link>http://localhost:1313/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/talks/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
