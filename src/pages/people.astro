@@ -32,6 +32,7 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
                 researchArea={person.data.researchArea}
                 contact={person.data.contact}
                 photo={person.data.photo}
+                cvHref={person.data.cv ? `/people/${person.id}/` : undefined}
               />
             ))
           }
@@ -50,6 +51,7 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
                 years={person.data.years}
                 researchArea={person.data.researchArea}
                 photo={person.data.photo}
+                cvHref={person.data.cv ? `/people/${person.id}/` : undefined}
               />
             ))
           }
@@ -68,6 +70,7 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
                 years={person.data.years}
                 researchArea={person.data.researchArea}
                 photo={person.data.photo}
+                cvHref={person.data.cv ? `/people/${person.id}/` : undefined}
               />
             ))
           }

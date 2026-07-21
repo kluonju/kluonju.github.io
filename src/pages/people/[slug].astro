@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PersonCard from '../../components/PersonCard.astro';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people', ({ data }) => data.cv);
+  return people.map((person) => ({
+    params: { slug: person.id },
+    props: { person },
+  }));
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+const title = `${person.data.name} — CV`;
+---
+
+<BaseLayout title={title} description={`Curriculum vitae of ${person.data.name}.`}>
+  <div class="page">
+    <div class="container-narrow">
+      <header class="page-header">
+        <p class="crumb"><a href="/people/">People</a> / CV</p>
+        <h1>Curriculum Vitae</h1>
+      </header>
+
+      <div class="profile">
+        <PersonCard
+          name={person.data.name}
+          nameZh={person.data.nameZh}
+          role={person.data.role}
+          researchArea={person.data.researchArea}
+          years={person.data.years}
+          contact={person.data.contact}
+          photo={person.data.photo}
+        />
+      </div>
+
+      <article class="prose cv-body">
+        <Content />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumb {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+
+  .crumb a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .profile {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .cv-body :global(h2) {
+    margin-top: 2rem;
+  }
+</style>

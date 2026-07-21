@@ -15,6 +15,8 @@ const people = defineCollection({
     destination: z.string().optional(),
     order: z.number().default(100),
     active: z.boolean().default(true),
+    /** When true, the markdown body is rendered as a CV at /people/<slug>/ */
+    cv: z.boolean().default(false),
   }),
 });
 

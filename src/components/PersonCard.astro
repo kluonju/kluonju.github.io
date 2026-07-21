@@ -10,6 +10,7 @@ interface Props {
   thesis?: string;
   destination?: string;
   compact?: boolean;
+  cvHref?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   thesis,
   destination,
   compact = false,
+  cvHref,
 } = Astro.props;
 
 const roleLabel: Record<string, string> = {
@@ -50,6 +52,11 @@ const roleLabel: Record<string, string> = {
     {contact && <p><span class="label">Contact</span> {contact}</p>}
     {thesis && <p><span class="label">Thesis</span> {thesis}</p>}
     {destination && <p><span class="label">Next</span> {destination}</p>}
+    {cvHref && (
+      <p class="cv-link">
+        <a href={cvHref}>Curriculum Vitae →</a>
+      </p>
+    )}
   </div>
 </article>
 
@@ -104,6 +111,15 @@ const roleLabel: Record<string, string> = {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+  }
+
+  .cv-link {
+    margin-top: 0.55rem;
+  }
+
+  .cv-link a {
+    font-weight: 600;
+    text-decoration: none;
   }
 
   @media (max-width: 520px) {
