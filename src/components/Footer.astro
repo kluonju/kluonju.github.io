@@ -1,0 +1,69 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-brand">Luo's Theory Lab</p>
+      <p class="footer-meta">Nanjing University of Science and Technology</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://orcid.org/0000-0002-3802-0029">ORCID</a>
+      <a href="https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ">Google Scholar</a>
+      <a href="mailto:kluo@njust.edu.cn">Contact</a>
+    </div>
+    <p class="footer-copy">&copy; {year} Kai Luo</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-line);
+    background: var(--color-paper-warm);
+    padding: 2.5rem 0;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+
+  .footer-meta,
+  .footer-copy {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-links a {
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+
+  @media (min-width: 720px) {
+    .footer-inner {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+
+    .footer-copy {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

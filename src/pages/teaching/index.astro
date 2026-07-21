@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const hub = (await getCollection('teaching')).find((t) => t.id === 'hub');
+const semesters = (await getCollection('teaching'))
+  .filter((t) => t.id !== 'hub')
+  .sort((a, b) => a.data.order - b.data.order);
+
+const { Content } = hub ? await render(hub) : { Content: null };
+---
+
+<BaseLayout title="Teaching" description="Teaching materials from Luo's Theory Lab.">
+  <div class="page">
+    <div class="container-narrow">
+      <header class="page-header">
+        <h1>{hub?.data.title ?? 'Teaching'}</h1>
+        {hub?.data.description && <p>{hub.data.description}</p>}
+      </header>
+
+      {Content && (
+        <div class="prose">
+          <Content />
+        </div>
+      )}
+
+      {
+        !Content && (
+          <ul>
+            {semesters.map((s) => (
+              <li>
+                <a href={`/teaching/${s.id}/`}>{s.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

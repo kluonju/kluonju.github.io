@@ -1,0 +1,211 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PersonCard from '../components/PersonCard.astro';
+import PubItem from '../components/PubItem.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+
+const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+const people = (await getCollection('people'))
+  .filter((p) => p.data.active && p.data.role !== 'alumni')
+  .sort((a, b) => a.data.order - b.data.order);
+const recentPubs = (await getCollection('publications'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+---
+
+<BaseLayout
+  title="Luo's Theory Lab"
+  description="Computational electronic structure theory — orbital-free DFT, Kohn–Sham DFT, and reduced density matrix methods under extreme conditions."
+>
+  <Hero />
+
+  <section class="section mission reveal">
+    <div class="container">
+      <p class="section-label">Mission</p>
+      <h2>Accuracy where electronic interactions matter</h2>
+      <p class="mission-text">
+        We leverage computational power to solve problems dominated by electronic interactions. Because of the
+        many-body fermionic nature of electrons, these problems must be approached approximately—choosing a level of
+        theory that balances accuracy with feasible time and resources.
+      </p>
+      <a class="btn btn-outline" href="/about/">About the lab</a>
+    </div>
+  </section>
+
+  <section class="section research-section reveal">
+    <div class="container">
+      <p class="section-label">Research</p>
+      <h2>Themes that define the group</h2>
+      <div class="research-grid">
+        {
+          research.map((theme) => (
+            <ResearchCard title={theme.data.title} summary={theme.data.summary} href={`/research/#${theme.id}`} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section people-section reveal">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="section-label">People</p>
+          <h2>Current group</h2>
+        </div>
+        <a class="btn btn-outline" href="/people/">All members</a>
+      </div>
+      <div class="people-grid">
+        {
+          people.map((person) => (
+            <PersonCard
+              compact
+              name={person.data.name}
+              nameZh={person.data.nameZh}
+              role={person.data.role}
+              researchArea={person.data.researchArea}
+              years={person.data.years}
+              photo={person.data.photo}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section pubs-section reveal">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Publications</p>
+          <h2>Selected recent work</h2>
+        </div>
+        <a class="btn btn-outline" href="/publications/">Full list</a>
+      </div>
+      <ol class="pub-list">
+        {
+          recentPubs.map((pub, i) => (
+            <PubItem
+              index={i + 1}
+              title={pub.data.title}
+              authors={pub.data.authors}
+              venue={pub.data.venue}
+              year={pub.data.year}
+              url={pub.data.url}
+              pdf={pub.data.pdf}
+              bibtex={pub.data.bibtex}
+              arxiv={pub.data.arxiv}
+            />
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section more-section reveal">
+    <div class="container more-grid">
+      <div>
+        <p class="section-label">Teaching</p>
+        <h2>Mathematical methods in physics</h2>
+        <p>Course materials for 数学物理方法, including Fall 2024 lectures and homework.</p>
+        <a href="/teaching/">Teaching hub →</a>
+      </div>
+      <div>
+        <p class="section-label">Blog</p>
+        <h2>Notes from the lab</h2>
+        <p>Software install diaries and computational workflow notes for scientific codes.</p>
+        <a href="/posts/">Read the blog →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mission {
+    background: var(--color-paper);
+  }
+
+  .mission-text {
+    max-width: 42rem;
+    font-size: 1.12rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .research-section {
+    background: var(--color-paper-warm);
+  }
+
+  .research-grid {
+    display: grid;
+    gap: 2rem 2.5rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 720px) {
+    .research-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-head h2 {
+    margin: 0;
+  }
+
+  .people-grid {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 800px) {
+    .people-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .more-section {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .more-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .more-grid h2 {
+    margin: 0 0 0.6rem;
+  }
+
+  .more-grid p {
+    color: var(--color-muted);
+    max-width: 28rem;
+  }
+
+  .more-grid a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (min-width: 720px) {
+    .more-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  href?: string;
+}
+
+const { title, summary, href = '/research/' } = Astro.props;
+---
+
+<article class="card">
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <a class="more" href={href}>Explore research</a>
+</article>
+
+<style>
+  .card {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 0 0 0.85rem;
+    color: var(--color-muted);
+    font-size: 0.98rem;
+  }
+
+  .more {
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    color: var(--color-teal-deep);
+  }
+
+  .more:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PersonCard from '../components/PersonCard.astro';
+
+const people = await getCollection('people');
+const sorted = people.sort((a, b) => a.data.order - b.data.order);
+
+const pi = sorted.filter((p) => p.data.role === 'pi');
+const graduate = sorted.filter((p) => p.data.role === 'graduate' && p.data.active);
+const undergrad = sorted.filter((p) => p.data.role === 'undergrad' && p.data.active);
+const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
+---
+
+<BaseLayout title="People" description="Members and alumni of Luo's Theory Lab.">
+  <div class="page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Group Members</h1>
+        <p>Researchers developing electronic structure methods and applications under extreme conditions.</p>
+      </header>
+
+      <section class="block">
+        <h2>Principal Investigator</h2>
+        <div class="stack">
+          {
+            pi.map((person) => (
+              <PersonCard
+                name={person.data.name}
+                nameZh={person.data.nameZh}
+                role={person.data.role}
+                researchArea={person.data.researchArea}
+                contact={person.data.contact}
+                photo={person.data.photo}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Graduate</h2>
+        <div class="stack">
+          {
+            graduate.map((person) => (
+              <PersonCard
+                name={person.data.name}
+                nameZh={person.data.nameZh}
+                role={person.data.role}
+                years={person.data.years}
+                researchArea={person.data.researchArea}
+                photo={person.data.photo}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Undergraduate</h2>
+        <div class="stack">
+          {
+            undergrad.map((person) => (
+              <PersonCard
+                name={person.data.name}
+                nameZh={person.data.nameZh}
+                role={person.data.role}
+                years={person.data.years}
+                researchArea={person.data.researchArea}
+                photo={person.data.photo}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Alumni</h2>
+        <ul class="alumni">
+          {
+            alumni.map((person) => (
+              <li>
+                <strong>
+                  {person.data.nameZh ?? person.data.name}
+                  {person.data.nameZh && person.data.name ? ` (${person.data.name})` : ''}
+                </strong>
+                {person.data.years && <> ({person.data.years})</>}
+                {person.data.destination && <> — {person.data.destination}</>}
+                {person.data.thesis && (
+                  <div class="thesis">论文《{person.data.thesis}》</div>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .block {
+    margin-bottom: 2.75rem;
+  }
+
+  .block h2 {
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .stack {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .alumni {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .alumni li {
+    margin-bottom: 1rem;
+  }
+
+  .thesis {
+    margin-top: 0.25rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+</style>

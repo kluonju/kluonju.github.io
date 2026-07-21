@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
+  const year = String(post.data.date.getFullYear());
+  (acc[year] ??= []).push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Archive" description="Blog archive for Luo's Theory Lab.">
+  <div class="page">
+    <div class="container-narrow">
+      <header class="page-header">
+        <h1>Archive</h1>
+        <p><a href="/posts/">← Back to blog</a></p>
+      </header>
+
+      {
+        years.map((year) => (
+          <section class="year">
+            <h2>{year}</h2>
+            <ul>
+              {byYear[year].map((post) => (
+                <li>
+                  <time datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+                  </time>
+                  <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .year {
+    margin-bottom: 2rem;
+  }
+
+  .year h2 {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+  }
+
+  time {
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.92rem;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

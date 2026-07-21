@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PubItem from '../components/PubItem.astro';
+
+const pubs = (await getCollection('publications')).sort((a, b) => a.data.order - b.data.order);
+const after = pubs.filter((p) => p.data.era === 'after-njust');
+const before = pubs.filter((p) => p.data.era === 'before-njust');
+---
+
+<BaseLayout title="Publications" description="Publications from Luo's Theory Lab.">
+  <div class="page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Publications</h1>
+        <p>
+          Profiles:
+          <a href="https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ">Google Scholar</a>
+          ·
+          <a href="https://www.webofscience.com/wos/author/record/O-3048-2018">Web of Science</a>
+          ·
+          <a href="https://orcid.org/0000-0002-3802-0029">ORCID</a>
+        </p>
+        <p class="note">† denotes corresponding author; * denotes co-first author.</p>
+      </header>
+
+      <section class="era">
+        <h2>After Joining NJUST</h2>
+        <ol class="pub-list">
+          {
+            after.map((pub, i) => (
+              <PubItem
+                index={i + 1}
+                title={pub.data.title}
+                authors={pub.data.authors}
+                venue={pub.data.venue}
+                year={pub.data.year}
+                url={pub.data.url}
+                pdf={pub.data.pdf}
+                bibtex={pub.data.bibtex}
+                suppPdf={pub.data.suppPdf}
+                arxiv={pub.data.arxiv}
+                extraLinks={pub.data.extraLinks}
+              />
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="era">
+        <h2>Before Joining NJUST</h2>
+        <ol class="pub-list">
+          {
+            before.map((pub, i) => (
+              <PubItem
+                index={i + 1}
+                title={pub.data.title}
+                authors={pub.data.authors}
+                venue={pub.data.venue}
+                year={pub.data.year}
+                url={pub.data.url}
+                pdf={pub.data.pdf}
+                bibtex={pub.data.bibtex}
+                suppPdf={pub.data.suppPdf}
+                arxiv={pub.data.arxiv}
+                extraLinks={pub.data.extraLinks}
+              />
+            ))
+          }
+        </ol>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .note {
+    font-size: 0.95rem;
+  }
+
+  .era {
+    margin-bottom: 2.5rem;
+  }
+
+  .era h2 {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .pub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

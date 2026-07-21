@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const themes = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  themes.map(async (theme) => {
+    const { Content } = await render(theme);
+    return { theme, Content };
+  }),
+);
+---
+
+<BaseLayout title="Research" description="Research themes in Luo's Theory Lab.">
+  <div class="page">
+    <div class="container-narrow">
+      <header class="page-header">
+        <h1>Research</h1>
+        <p>
+          Our work spans multiple levels of electronic structure theory and materials under extreme thermodynamic
+          conditions.
+        </p>
+      </header>
+
+      <div class="themes">
+        {
+          rendered.map(({ theme, Content }) => (
+            <article class="theme" id={theme.id}>
+              <h2>{theme.data.title}</h2>
+              <p class="summary">{theme.data.summary}</p>
+              <div class="prose">
+                <Content />
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .themes {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .theme {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .theme:last-child {
+    border-bottom: none;
+  }
+
+  .theme h2 {
+    margin: 0 0 0.5rem;
+  }
+
+  .summary {
+    color: var(--color-teal-deep);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+</style>

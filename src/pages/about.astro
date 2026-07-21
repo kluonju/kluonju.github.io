@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About Luo's Theory Lab and our approaches to electronic structure theory.">
+  <div class="page">
+    <div class="container-narrow">
+      <header class="page-header">
+        <h1>About</h1>
+      </header>
+      <div class="prose">
+        <p>
+          We are focused on leveraging computational power to solve problems where electronic interactions are crucial.
+          Due to the computational challenges posed by the complex many-body fermionic nature of electrons, these
+          problems must be approached approximately. The chosen level of theory must balance accuracy with the
+          feasibility of completing the task within a reasonable timeframe and resource constraints.
+        </p>
+        <p>Our theoretical approaches span various levels of accuracy, including:</p>
+        <ul>
+          <li><strong>orbital-free density functional theory</strong>,</li>
+          <li><strong>conventional Kohn–Sham density functional theory</strong>,</li>
+          <li><strong>one-body reduced density matrix functional theory</strong>,</li>
+          <li><strong>two-body density matrix functional theory</strong>.</li>
+        </ul>
+        <p>
+          We work with materials composed of nearly all stable atoms from the periodic table, under a wide range of
+          thermodynamic conditions—from absolute zero up to 1,000,000,000 Kelvin, and from 0 GPa to thousands of GPa in
+          pressure. Each temperature requires rigorous numerical testing to ensure convergence, necessitating expertise
+          in pseudopotentials, basis sets, and k-point grids within our group.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

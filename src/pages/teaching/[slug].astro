@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const courses = (await getCollection('teaching')).filter((t) => t.id !== 'hub');
+  return courses.map((course) => ({
+    params: { slug: course.id },
+    props: { course },
+  }));
+}
+
+const { course } = Astro.props;
+const { Content } = await render(course);
+---
+
+<BaseLayout title={course.data.title} description={course.data.description ?? course.data.title}>
+  <div class="page">
+    <div class="container">
+      <header class="page-header">
+        <p class="crumb"><a href="/teaching/">Teaching</a> / {course.data.title}</p>
+        <h1>{course.data.title}</h1>
+        {course.data.description && <p>{course.data.description}</p>}
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumb {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  .crumb a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>
