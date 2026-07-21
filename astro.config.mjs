@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://kluonj.github.io',
+  site: 'https://kluonju.github.io',
   trailingSlash: 'always',
   build: {
     format: 'directory',

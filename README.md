@@ -16,6 +16,6 @@ npm run build
 npm run preview
 ```
 
-Site URL: <https://kluonj.github.io/>
+Site URL: <https://kluonju.github.io/>
 
 Content lives in `src/content/` (people, publications, research, teaching, posts). Static assets (photos, PDFs, bib files) are in `public/`.
