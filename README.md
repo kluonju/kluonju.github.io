@@ -18,4 +18,13 @@ npm run preview
 
 Site URL: <https://kluonju.github.io/>
 
-Content lives in `src/content/` (people, publications, research, teaching, posts). Static assets (photos, PDFs, bib files) are in `public/`.
+## Deploy (GitHub Pages)
+
+This site is built with Astro via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). In the repo on GitHub:
+
+1. **Settings → Pages → Build and deployment → Source**: choose **GitHub Actions** (not “Deploy from a branch”).
+2. Push to `master`/`main`, or run the **Deploy Astro site to GitHub Pages** workflow manually.
+
+If Source is set to a branch, GitHub runs the legacy Jekyll “pages build and deployment” job on the Astro source tree and that build will fail.
+
+Content lives in `src/content/` (people, publications, research, teaching, talks, posts). Static assets (photos, PDFs, bib files) are in `public/`.
