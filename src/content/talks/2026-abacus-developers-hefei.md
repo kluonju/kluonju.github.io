@@ -2,7 +2,7 @@
 title: Reduced density matrix functional theory for periodic systems
 kind: invited
 event: 6th ABACUS Developers' Meeting
-date: "2026-01-01"
+date: "2026-08-06"
 location: Hefei, China
 draft: false
 ---
