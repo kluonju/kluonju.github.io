@@ -1,0 +1,655 @@
+---
+interface PaperSlide {
+  title: string;
+  authors?: string;
+  venue?: string;
+  year?: number;
+  url?: string;
+  cover: string;
+}
+
+interface Props {
+  slides?: PaperSlide[];
+  brand?: string;
+  tagline?: string;
+  mission?: string;
+}
+
+const {
+  slides = [],
+  brand = "Luo's Theory Lab",
+  tagline = 'Electronic structure theory under extreme conditions',
+  mission = 'We develop and apply orbital-free DFT, Kohn–Sham DFT, and reduced density matrix methods to materials across vast ranges of temperature and pressure.',
+} = Astro.props;
+
+const total = 1 + slides.length;
+---
+
+<section
+  class="pub-banner"
+  aria-roledescription="carousel"
+  aria-label="Lab introduction and recent papers"
+  data-pub-banner
+>
+  <div class="banner-bg" aria-hidden="true">
+    <svg class="lattice" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bannerFade" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0b1f33" />
+          <stop offset="55%" stop-color="#123448" />
+          <stop offset="100%" stop-color="#1f6f78" />
+        </linearGradient>
+        <pattern id="bannerGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M48 0H0V48" fill="none" stroke="rgba(247,244,239,0.08)" stroke-width="1" />
+        </pattern>
+      </defs>
+      <rect width="1200" height="800" fill="url(#bannerFade)" />
+      <rect width="1200" height="800" fill="url(#bannerGrid)" />
+      <g fill="none" stroke="rgba(247,244,239,0.18)" stroke-width="1.25">
+        <path class="wave w1" d="M0 520 C 200 440, 400 600, 600 520 S 1000 440, 1200 520" />
+        <path class="wave w2" d="M0 560 C 220 500, 420 640, 620 560 S 1020 500, 1200 560" />
+        <path class="wave w3" d="M0 600 C 240 560, 440 680, 640 600 S 1040 560, 1200 600" />
+      </g>
+      <circle class="node n1" cx="180" cy="220" r="3.5" fill="rgba(247,244,239,0.55)" />
+      <circle class="node n2" cx="420" cy="160" r="2.5" fill="rgba(247,244,239,0.4)" />
+      <circle class="node n3" cx="860" cy="210" r="4" fill="rgba(196,122,58,0.7)" />
+      <circle class="node n4" cx="1040" cy="300" r="2.8" fill="rgba(247,244,239,0.45)" />
+    </svg>
+  </div>
+
+  <div class="container banner-layout">
+    <div class="copy">
+      <div class="slides" aria-live="polite">
+        <article class="slide lab active" data-slide="0" data-kind="lab">
+          <p class="brand-mark">{brand}</p>
+          <h1 class="tagline">{tagline}</h1>
+          <p class="lede">{mission}</p>
+          <p class="actions">
+            <a class="btn btn-primary" href="/people/">Meet the group</a>
+            <a class="btn btn-ghost" href="/publications/">Publications</a>
+          </p>
+        </article>
+
+        {
+          slides.map((slide, i) => (
+            <article class="slide paper" data-slide={i + 1} data-kind="paper" hidden>
+              <p class="section-label">
+                <a href="/publications/">Recent papers</a>
+              </p>
+              {(slide.year || slide.venue) && (
+                <p class="meta">
+                  {slide.year && <span class="year">{slide.year}</span>}
+                  {slide.year && slide.venue && <span class="sep-dot" aria-hidden="true" />}
+                  {slide.venue && <span class="venue">{slide.venue}</span>}
+                </p>
+              )}
+              <h2 class="title">
+                {slide.url ? <a href={slide.url}>{slide.title}</a> : slide.title}
+              </h2>
+              {slide.authors && <p class="authors" set:html={slide.authors} />}
+              <p class="actions">
+                {slide.url && (
+                  <a class="btn btn-ghost" href={slide.url}>
+                    Read paper
+                  </a>
+                )}
+                <a class="all-link" href="/publications/">
+                  All publications →
+                </a>
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        total > 1 && (
+          <div class="controls">
+            <div class="dots" role="tablist" aria-label="Choose slide">
+              <button
+                type="button"
+                class="dot-btn active"
+                role="tab"
+                aria-selected="true"
+                aria-label={`Show lab introduction: ${brand}`}
+                data-goto="0"
+              />
+              {slides.map((slide, i) => (
+                <button
+                  type="button"
+                  class="dot-btn"
+                  role="tab"
+                  aria-selected="false"
+                  aria-label={`Show paper ${i + 1}: ${slide.title}`}
+                  data-goto={i + 1}
+                />
+              ))}
+            </div>
+            <div class="progress" aria-hidden="true">
+              <span class="progress-bar" data-progress />
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="figure-stage" aria-hidden="true">
+      <figure class="figure lab-figure active" data-figure="0">
+        <div class="lab-orb">
+          <span class="lab-orb-ring" />
+          <span class="lab-orb-core" />
+          <span class="lab-orb-label">{brand}</span>
+        </div>
+      </figure>
+      {
+        slides.map((slide, i) => (
+          <figure class="figure" data-figure={i + 1}>
+            <img src={slide.cover} alt="" width="900" height="1160" loading="lazy" />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-pub-banner]');
+  if (root) {
+    const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+    const figures = [...root.querySelectorAll<HTMLElement>('[data-figure]')];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-goto]')];
+    const bar = root.querySelector<HTMLElement>('[data-progress]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const interval = 7000;
+    let index = 0;
+    let timer: number | undefined;
+    let started = 0;
+    let raf = 0;
+
+    const show = (next: number) => {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const on = i === index;
+        slide.classList.toggle('active', on);
+        slide.hidden = !on;
+      });
+      figures.forEach((fig, i) => fig.classList.toggle('active', i === index));
+      dots.forEach((dot, i) => {
+        const on = i === index;
+        dot.classList.toggle('active', on);
+        dot.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      root.dataset.active = String(index);
+      started = performance.now();
+      if (bar) bar.style.transform = 'scaleX(0)';
+    };
+
+    const tick = (now: number) => {
+      if (!bar || reduceMotion) return;
+      const t = Math.min(1, (now - started) / interval);
+      bar.style.transform = `scaleX(${t})`;
+      raf = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    const start = () => {
+      if (reduceMotion || slides.length < 2) return;
+      stop();
+      started = performance.now();
+      raf = requestAnimationFrame(tick);
+      timer = window.setInterval(() => show(index + 1), interval);
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        show(Number(dot.dataset.goto));
+        start();
+      });
+    });
+
+    // Pause only while interacting with controls — the banner is full-viewport,
+    // so pausing on any hover would stop autoplay as soon as the page loads.
+    const controls = root.querySelector('.controls');
+    controls?.addEventListener('mouseenter', stop);
+    controls?.addEventListener('mouseleave', start);
+    controls?.addEventListener('focusin', stop);
+    controls?.addEventListener('focusout', (e) => {
+      if (!controls.contains(e.relatedTarget as Node | null)) start();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    show(0);
+    start();
+  }
+</script>
+
+<style>
+  .pub-banner {
+    position: relative;
+    min-height: calc(100vh - var(--header-h));
+    display: grid;
+    align-items: center;
+    color: rgba(247, 244, 239, 0.9);
+    overflow: hidden;
+    padding: 3rem 0 2.5rem;
+  }
+
+  .banner-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lattice {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .banner-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    width: min(100% - 2rem, var(--measure-wide));
+  }
+
+  @media (min-width: 860px) {
+    .banner-layout {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+      gap: 2.5rem;
+    }
+  }
+
+  .slides {
+    position: relative;
+  }
+
+  .slide {
+    animation: fadeUp 0.55s var(--ease) both;
+  }
+
+  .slide[hidden] {
+    display: none;
+  }
+
+  .brand-mark {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.1rem;
+    color: #fff;
+  }
+
+  .tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(247, 244, 239, 0.88);
+    margin: 0 0 1rem;
+    max-width: 28rem;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(247, 244, 239, 0.78);
+    margin: 0 0 1.75rem;
+    max-width: 34rem;
+  }
+
+  .section-label {
+    margin: 0 0 1rem;
+  }
+
+  .section-label a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .section-label a:hover {
+    color: #fff;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 0 0.85rem;
+    font-size: 0.9rem;
+    color: rgba(247, 244, 239, 0.62);
+  }
+
+  .year {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: rgba(247, 244, 239, 0.85);
+  }
+
+  .sep-dot {
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .title {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #fff;
+    max-width: 34rem;
+  }
+
+  .title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .title a:hover {
+    color: var(--color-accent);
+  }
+
+  .authors {
+    margin: 0 0 1.4rem;
+    color: rgba(247, 244, 239, 0.72);
+    max-width: 34rem;
+    font-size: 0.98rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    margin: 0;
+  }
+
+  .all-link {
+    color: rgba(247, 244, 239, 0.78);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .all-link:hover {
+    color: var(--color-accent);
+  }
+
+  .controls {
+    margin-top: 1.75rem;
+    display: grid;
+    gap: 0.75rem;
+    max-width: 16rem;
+  }
+
+  .dots {
+    display: flex;
+    gap: 0.45rem;
+  }
+
+  .dot-btn {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(247, 244, 239, 0.28);
+    cursor: pointer;
+    transition:
+      background 0.25s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .dot-btn.active,
+  .dot-btn:hover {
+    background: var(--color-accent);
+    transform: scale(1.15);
+  }
+
+  .progress {
+    height: 2px;
+    background: rgba(247, 244, 239, 0.12);
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .figure-stage {
+    position: relative;
+    min-height: 22rem;
+    isolation: isolate;
+  }
+
+  .figure {
+    margin: 0;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    transition:
+      opacity 0.55s var(--ease),
+      transform 0.55s var(--ease);
+    pointer-events: none;
+  }
+
+  .figure.active {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .figure img {
+    width: min(100%, 34rem);
+    height: auto;
+    max-height: min(38rem, 72vh);
+    object-fit: contain;
+    background: #fff;
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(247, 244, 239, 0.08);
+  }
+
+  .lab-orb {
+    position: relative;
+    width: min(100%, 24rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .lab-orb-ring,
+  .lab-orb-core {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .lab-orb-ring {
+    inset: 8%;
+    border: 1.5px solid rgba(247, 244, 239, 0.22);
+    box-shadow: inset 0 0 40px rgba(31, 111, 120, 0.35);
+    animation: spin 28s linear infinite;
+  }
+
+  .lab-orb-ring::before,
+  .lab-orb-ring::after {
+    content: '';
+    position: absolute;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .lab-orb-ring::before {
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .lab-orb-ring::after {
+    bottom: 18%;
+    right: 16%;
+    background: rgba(247, 244, 239, 0.7);
+  }
+
+  .lab-orb-core {
+    inset: 28%;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(247, 244, 239, 0.28), transparent 45%),
+      radial-gradient(circle at 50% 55%, rgba(31, 111, 120, 0.85), rgba(11, 31, 51, 0.95));
+    border: 1px solid rgba(247, 244, 239, 0.16);
+  }
+
+  .lab-orb-label {
+    position: relative;
+    z-index: 1;
+    max-width: 7.5rem;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .wave {
+    animation: drift 14s ease-in-out infinite alternate;
+  }
+
+  .w2 {
+    animation-delay: -3s;
+    animation-duration: 18s;
+  }
+
+  .w3 {
+    animation-delay: -6s;
+    animation-duration: 22s;
+  }
+
+  .node {
+    animation: pulse 5s ease-in-out infinite;
+  }
+
+  .n2 {
+    animation-delay: -1.5s;
+  }
+
+  .n3 {
+    animation-delay: -2.5s;
+  }
+
+  .n4 {
+    animation-delay: -3.5s;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-24px);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 859px) {
+    .pub-banner {
+      min-height: calc(92vh - var(--header-h));
+      align-items: center;
+      padding: 2.5rem 0;
+    }
+
+    .figure-stage {
+      order: -1;
+      min-height: 16rem;
+    }
+
+    .figure {
+      position: relative;
+      inset: auto;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .figure.active {
+      height: auto;
+      overflow: visible;
+    }
+
+    .lab-orb {
+      width: min(100%, 15rem);
+    }
+
+    .figure img {
+      width: min(100%, 22rem);
+      max-height: 28rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide,
+    .figure,
+    .wave,
+    .node,
+    .lab-orb-ring {
+      animation: none;
+      transition: none;
+    }
+
+    .progress {
+      display: none;
+    }
+  }
+</style>

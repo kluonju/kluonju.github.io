@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
 import PersonCard from '../components/PersonCard.astro';
+import PubBanner from '../components/PubBanner.astro';
 import PubItem from '../components/PubItem.astro';
 import ResearchCard from '../components/ResearchCard.astro';
 
@@ -10,6 +10,17 @@ const research = (await getCollection('research')).sort((a, b) => a.data.order -
 const people = (await getCollection('people'))
   .filter((p) => p.data.active && p.data.role !== 'alumni')
   .sort((a, b) => a.data.order - b.data.order);
+const bannerSlides = (await getCollection('banner'))
+  .filter((item) => !item.id.startsWith('_'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((item) => ({
+    title: item.data.title,
+    authors: item.data.authors,
+    venue: item.data.venue,
+    year: item.data.year,
+    url: item.data.url,
+    cover: item.data.cover,
+  }));
 const recentPubs = (await getCollection('publications'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 4);
@@ -19,7 +30,7 @@ const recentPubs = (await getCollection('publications'))
   title="Luo's Theory Lab"
   description="Computational electronic structure theory — orbital-free DFT, Kohn–Sham DFT, and reduced density matrix methods under extreme conditions."
 >
-  <Hero />
+  <PubBanner slides={bannerSlides} />
 
   <section class="section mission reveal">
     <div class="container">

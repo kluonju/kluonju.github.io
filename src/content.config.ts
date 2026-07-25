@@ -41,6 +41,21 @@ const publications = defineCollection({
   }),
 });
 
+/** Manually curated homepage showcase slides. Place cover images in public/banner/. */
+const banner = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx,yml,yaml}', base: './src/content/banner' }),
+  schema: z.object({
+    title: z.string(),
+    authors: z.string().optional(),
+    venue: z.string().optional(),
+    year: z.number().optional(),
+    url: z.string().optional(),
+    /** Path under public/, e.g. /banner/my-figure.png */
+    cover: z.string(),
+    order: z.number().default(100),
+  }),
+});
+
 const research = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/research' }),
   schema: z.object({
@@ -84,4 +99,4 @@ const teaching = defineCollection({
   }),
 });
 
-export const collections = { people, publications, research, talks, posts, teaching };
+export const collections = { people, publications, banner, research, talks, posts, teaching };
