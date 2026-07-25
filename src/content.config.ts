@@ -69,6 +69,8 @@ const talks = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/talks' }),
   schema: z.object({
     title: z.string(),
+    /** invited | contributed — avoid the name `type` (reserved by Astro content entries). */
+    kind: z.enum(['invited', 'contributed']),
     event: z.string().optional(),
     date: z.coerce.date().optional(),
     location: z.string().optional(),

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Bi from '../components/Bi.astro';
 import { ui } from '../i18n/ui';
@@ -7,10 +7,33 @@ import { ui } from '../i18n/ui';
 const talks = (await getCollection('talks'))
   .filter((t) => !t.data.draft)
   .sort((a, b) => {
-  const da = a.data.date?.valueOf() ?? 0;
-  const db = b.data.date?.valueOf() ?? 0;
-  return db - da;
-});
+    const da = a.data.date?.valueOf() ?? 0;
+    const db = b.data.date?.valueOf() ?? 0;
+    return db - da;
+  });
+
+const rendered = await Promise.all(
+  talks.map(async (talk) => {
+    const { Content } = await render(talk);
+    const hasAbstract = Boolean(talk.body?.trim());
+    return { talk, Content, hasAbstract };
+  }),
+);
+
+const sections = [
+  {
+    key: 'invited' as const,
+    items: rendered.filter((t) => t.talk.data.kind === 'invited'),
+    en: ui.en.talksInvited,
+    zh: ui.zh.talksInvited,
+  },
+  {
+    key: 'contributed' as const,
+    items: rendered.filter((t) => t.talk.data.kind === 'contributed'),
+    en: ui.en.talksContributed,
+    zh: ui.zh.talksContributed,
+  },
+];
 ---
 
 <BaseLayout title="Talks" titleZh="报告" description="Talks and seminars from Luo's Theory Lab.">
@@ -18,34 +41,63 @@ const talks = (await getCollection('talks'))
     <div class="container-narrow">
       <header class="page-header">
         <h1><Bi en={ui.en.navTalks} zh={ui.zh.navTalks} /></h1>
-        <p>Invited talks, seminars, and conference presentations.</p>
+        <p>Invited and contributed talks.</p>
       </header>
 
       {
         talks.length === 0 ? (
           <p class="empty"><Bi en={ui.en.talksEmpty} zh={ui.zh.talksEmpty} /></p>
         ) : (
-          <ul class="talk-list">
-            {talks.map((talk) => (
-              <li>
-                <h2>{talk.data.title}</h2>
-                <p class="meta">
-                  {[talk.data.event, talk.data.location, talk.data.date?.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })]
-                    .filter(Boolean)
-                    .join(' · ')}
-                </p>
-                <p class="links">
-                  {talk.data.url && <a href={talk.data.url}>Details</a>}
-                  {talk.data.slides && (
-                    <>
-                      {talk.data.url && ' · '}
-                      <a href={talk.data.slides}>Slides</a>
-                    </>
-                  )}
-                </p>
-              </li>
-            ))}
-          </ul>
+          sections.map(
+            (section) =>
+              section.items.length > 0 && (
+                <section class="talk-section" aria-labelledby={`talks-${section.key}`}>
+                  <h2 id={`talks-${section.key}`} class="section-title">
+                    <Bi en={section.en} zh={section.zh} />
+                  </h2>
+                  <ul class="talk-list">
+                    {section.items.map(({ talk, Content, hasAbstract }) => (
+                      <li>
+                        <h3>{talk.data.title}</h3>
+                        <p class="meta">
+                          {[
+                            talk.data.event,
+                            talk.data.location,
+                            talk.data.date?.toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                            }),
+                          ]
+                            .filter(Boolean)
+                            .join(' · ')}
+                        </p>
+                        {hasAbstract && (
+                          <div class="abstract">
+                            <p class="abstract-label">
+                              <Bi en={ui.en.talksAbstract} zh={ui.zh.talksAbstract} />
+                            </p>
+                            <div class="abstract-body prose">
+                              <Content />
+                            </div>
+                          </div>
+                        )}
+                        {(talk.data.url || talk.data.slides) && (
+                          <p class="links">
+                            {talk.data.url && <a href={talk.data.url}>Details</a>}
+                            {talk.data.slides && (
+                              <>
+                                {talk.data.url && ' · '}
+                                <a href={talk.data.slides}>Slides</a>
+                              </>
+                            )}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ),
+          )
         )
       }
     </div>
@@ -59,6 +111,18 @@ const talks = (await getCollection('talks'))
     border-top: 1px solid var(--color-line);
   }
 
+  .talk-section + .talk-section {
+    margin-top: 2.25rem;
+  }
+
+  .section-title {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-teal);
+  }
+
   .talk-list {
     list-style: none;
     margin: 0;
@@ -70,9 +134,10 @@ const talks = (await getCollection('talks'))
     border-bottom: 1px solid var(--color-line);
   }
 
-  .talk-list h2 {
+  .talk-list h3 {
     margin: 0 0 0.35rem;
     font-size: 1.15rem;
+    font-weight: 600;
   }
 
   .meta,
@@ -82,7 +147,34 @@ const talks = (await getCollection('talks'))
     font-size: 0.95rem;
   }
 
+  .abstract {
+    margin-top: 0.85rem;
+  }
+
+  .abstract-label {
+    margin: 0 0 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+
+  .abstract-body {
+    color: var(--color-ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .abstract-body :global(p) {
+    margin: 0 0 0.65rem;
+  }
+
+  .abstract-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
   .links {
-    margin-top: 0.35rem;
+    margin-top: 0.65rem;
   }
 </style>

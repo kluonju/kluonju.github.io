@@ -48,6 +48,9 @@ export const ui = {
     beforeNjust: 'Before Joining NJUST',
     authorNote: '† denotes corresponding author; * denotes co-first author.',
     talksEmpty: 'Talk listings will appear here as they are added.',
+    talksInvited: 'Invited',
+    talksContributed: 'Contributed',
+    talksAbstract: 'Abstract',
   },
   zh: {
     brand: '罗凯理论实验室',
@@ -97,6 +100,9 @@ export const ui = {
     beforeNjust: '入职南理工之前',
     authorNote: '† 表示通讯作者；* 表示共同第一作者。',
     talksEmpty: '报告列表将随内容添加后显示于此。',
+    talksInvited: '特邀报告',
+    talksContributed: '会议报告',
+    talksAbstract: '摘要',
   },
 } as const;
 
