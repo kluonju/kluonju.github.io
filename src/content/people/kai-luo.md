@@ -43,3 +43,12 @@ cv: true
 ### Selected publications
 
 See the full list on the [Publications](/publications/) page.
+
+### Academic Services
+- Referee for Physical Review Letters, Physical Review B, Journal of Chemical Physics etc.
+- 
+
+### Teaching and Educational Involvement
+
+- 
+- External Ph.D. committiee member for Liang Sun(孙亮), Yu Cao(曹宇), Yuanbo Li(李源波), Zhihe Zhang(张之禾) (PhD, Peking University, 2026 May)
