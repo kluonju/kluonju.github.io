@@ -84,12 +84,18 @@ const total = 1 + slides.length;
                 </p>
               )}
               <h2 class="title">
-                {slide.url ? <a href={slide.url}>{slide.title}</a> : slide.title}
+                {slide.url ? (
+                  <a href={slide.url} target="_blank" rel="noopener noreferrer">
+                    {slide.title}
+                  </a>
+                ) : (
+                  slide.title
+                )}
               </h2>
               {slide.authors && <p class="authors" set:html={slide.authors} />}
               <p class="actions">
                 {slide.url && (
-                  <a class="btn btn-ghost" href={slide.url}>
+                  <a class="btn btn-ghost" href={slide.url} target="_blank" rel="noopener noreferrer">
                     Read paper
                   </a>
                 )}
