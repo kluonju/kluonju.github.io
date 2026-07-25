@@ -27,6 +27,7 @@ const publications = defineCollection({
     authors: z.string(),
     venue: z.string(),
     year: z.number(),
+    date: z.coerce.date(),
     era: z.enum(['after-njust', 'before-njust']),
     url: z.string().optional(),
     doi: z.string().optional(),
@@ -37,7 +38,6 @@ const publications = defineCollection({
     extraLinks: z
       .array(z.object({ label: z.string(), href: z.string() }))
       .optional(),
-    order: z.number().default(100),
   }),
 });
 

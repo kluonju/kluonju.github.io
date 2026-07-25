@@ -14,13 +14,13 @@ cv: true
 
 ### Affiliation
 
-- Professor, Nanjing University of Science and Technology (NJUST)
+- Associate Professor, Nanjing University of Science and Technology (NJUST)
 
 ### Research interests
 
-- Orbital-free density functional theory
-- Kohn–Sham density functional theory
 - Reduced density matrix functional theory
+- Kohn–Sham density functional theory
+- Orbital-free density functional theory
 - Warm dense matter and materials under extreme conditions
 
 ### Contact
@@ -30,11 +30,15 @@ cv: true
 
 ### Education
 
-- *(Add degrees, institutions, and years here.)*
+- Ph.D., City University of New York, 2015 (Advisor: [Neepa T. Maitra](https://sites.rutgers.edu/maitra-group/))
+- B.S., Nanjing University, 2010 (Advisor: [Zhongzhou Ren](https://physics.tongji.edu.cn/info/1122/3282.htm))
 
 ### Appointments
 
-- *(Add positions and dates here.)*
+- Associate Professor, 2021.1--
+- Carnegie Institution for Science, 2019.9--2021.1
+- University of Florida, 2017.1--2019.9
+- Cornell University, 2015.7--2016.7
 
 ### Selected publications
 

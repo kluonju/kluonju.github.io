@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PubItem from '../components/PubItem.astro';
 
-const pubs = (await getCollection('publications')).sort((a, b) => a.data.order - b.data.order);
+const pubs = (await getCollection('publications')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 const after = pubs.filter((p) => p.data.era === 'after-njust');
 const before = pubs.filter((p) => p.data.era === 'before-njust');
 ---

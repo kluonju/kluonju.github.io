@@ -11,7 +11,7 @@ const people = (await getCollection('people'))
   .filter((p) => p.data.active && p.data.role !== 'alumni')
   .sort((a, b) => a.data.order - b.data.order);
 const recentPubs = (await getCollection('publications'))
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 4);
 ---
 
