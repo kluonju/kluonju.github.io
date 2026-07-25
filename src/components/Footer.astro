@@ -1,19 +1,32 @@
 ---
+import Bi from './Bi.astro';
+import { ui } from '../i18n/ui';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <p class="footer-brand">Luo's Theory Lab</p>
-      <p class="footer-meta">Nanjing University of Science and Technology</p>
+      <p class="footer-brand">
+        <Bi en={ui.en.brand} zh={ui.zh.brand} />
+      </p>
+      <p class="footer-meta">
+        <Bi en={ui.en.footerUni} zh={ui.zh.footerUni} />
+      </p>
     </div>
     <div class="footer-links">
       <a href="https://orcid.org/0000-0002-3802-0029" target="_blank" rel="noopener noreferrer">ORCID</a>
-      <a href="https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-      <a href="mailto:kluo@njust.edu.cn">Contact</a>
+      <a
+        href="https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ"
+        target="_blank"
+        rel="noopener noreferrer">Google Scholar</a
+      >
+      <a href="mailto:kluo@njust.edu.cn">
+        <Bi en={ui.en.footerContact} zh={ui.zh.footerContact} />
+      </a>
     </div>
-    <p class="footer-copy">&copy; {year} Kai Luo</p>
+    <p class="footer-copy">&copy; {year} Kai Luo / 罗凯</p>
   </div>
 </footer>
 

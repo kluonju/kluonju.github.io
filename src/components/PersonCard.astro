@@ -1,4 +1,7 @@
 ---
+import Bi from './Bi.astro';
+import { ui } from '../i18n/ui';
+
 interface Props {
   name: string;
   nameZh?: string;
@@ -27,11 +30,17 @@ const {
   cvHref,
 } = Astro.props;
 
-const roleLabel: Record<string, string> = {
-  pi: 'Principal Investigator',
-  graduate: 'Graduate',
-  undergrad: 'Undergraduate',
-  alumni: 'Alumni',
+const roleEn: Record<string, string> = {
+  pi: ui.en.rolePi,
+  graduate: ui.en.roleGraduate,
+  undergrad: ui.en.roleUndergrad,
+  alumni: ui.en.roleAlumni,
+};
+const roleZh: Record<string, string> = {
+  pi: ui.zh.rolePi,
+  graduate: ui.zh.roleGraduate,
+  undergrad: ui.zh.roleUndergrad,
+  alumni: ui.zh.roleAlumni,
 };
 ---
 
@@ -46,17 +55,58 @@ const roleLabel: Record<string, string> = {
       {name}
       {nameZh && <span class="zh">（{nameZh}）</span>}
     </h3>
-    <p class="role">{roleLabel[role] ?? role}</p>
-    {years && <p><span class="label">Years</span> {years}</p>}
-    {researchArea && <p><span class="label">Research</span> {researchArea}</p>}
-    {contact && <p><span class="label">Contact</span> {contact}</p>}
-    {thesis && <p><span class="label">Thesis</span> {thesis}</p>}
-    {destination && <p><span class="label">Next</span> {destination}</p>}
-    {cvHref && (
-      <p class="cv-link">
-        <a href={cvHref}>Curriculum Vitae →</a>
-      </p>
-    )}
+    <p class="role">
+      <Bi en={roleEn[role] ?? role} zh={roleZh[role] ?? role} />
+    </p>
+    {
+      years && (
+        <p>
+          <span class="label"><Bi en={ui.en.labelYears} zh={ui.zh.labelYears} /></span>
+          {years}
+        </p>
+      )
+    }
+    {
+      researchArea && (
+        <p>
+          <span class="label"><Bi en={ui.en.labelResearch} zh={ui.zh.labelResearch} /></span>
+          {researchArea}
+        </p>
+      )
+    }
+    {
+      contact && (
+        <p>
+          <span class="label"><Bi en={ui.en.labelContact} zh={ui.zh.labelContact} /></span>
+          {contact}
+        </p>
+      )
+    }
+    {
+      thesis && (
+        <p>
+          <span class="label"><Bi en={ui.en.labelThesis} zh={ui.zh.labelThesis} /></span>
+          {thesis}
+        </p>
+      )
+    }
+    {
+      destination && (
+        <p>
+          <span class="label"><Bi en={ui.en.labelNext} zh={ui.zh.labelNext} /></span>
+          {destination}
+        </p>
+      )
+    }
+    {
+      cvHref && (
+        <p class="cv-link">
+          <a href={cvHref}>
+            <Bi en={ui.en.cv} zh={ui.zh.cv} />
+          </a>
+        </p>
+      )
+    }
   </div>
 </article>
 
@@ -70,7 +120,6 @@ const roleLabel: Record<string, string> = {
 
   .person.compact {
     grid-template-columns: 88px 1fr;
-    gap: 0.85rem;
   }
 
   .photo {
@@ -81,7 +130,7 @@ const roleLabel: Record<string, string> = {
     background: var(--color-paper-warm);
   }
 
-  h3 {
+  .meta h3 {
     margin: 0 0 0.25rem;
     font-size: 1.15rem;
   }
@@ -89,6 +138,7 @@ const roleLabel: Record<string, string> = {
   .zh {
     font-weight: 500;
     color: var(--color-muted);
+    font-size: 0.92em;
   }
 
   .role {
@@ -99,33 +149,23 @@ const roleLabel: Record<string, string> = {
   }
 
   .meta p {
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.3rem;
     font-size: 0.95rem;
+    color: var(--color-ink-soft);
   }
 
   .label {
-    display: inline-block;
-    min-width: 4.5rem;
     color: var(--color-muted);
-    font-size: 0.82rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    margin-right: 0.35rem;
   }
 
   .cv-link {
-    margin-top: 0.55rem;
+    margin-top: 0.55rem !important;
   }
 
   .cv-link a {
     font-weight: 600;
     text-decoration: none;
-  }
-
-  @media (max-width: 520px) {
-    .person,
-    .person.compact {
-      grid-template-columns: 96px 1fr;
-    }
   }
 </style>

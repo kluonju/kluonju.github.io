@@ -1,14 +1,17 @@
 ---
+import Bi from './Bi.astro';
+import { ui } from '../i18n/ui';
+
 const pathname = Astro.url.pathname;
 
 const links = [
-  { href: '/about/', label: 'About' },
-  { href: '/people/', label: 'People' },
-  { href: '/research/', label: 'Research' },
-  { href: '/teaching/', label: 'Teaching' },
-  { href: '/publications/', label: 'Publications' },
-  { href: '/talks/', label: 'Talks' },
-  { href: '/posts/', label: 'Blog' },
+  { href: '/about/', en: ui.en.navAbout, zh: ui.zh.navAbout },
+  { href: '/people/', en: ui.en.navPeople, zh: ui.zh.navPeople },
+  { href: '/research/', en: ui.en.navResearch, zh: ui.zh.navResearch },
+  { href: '/teaching/', en: ui.en.navTeaching, zh: ui.zh.navTeaching },
+  { href: '/publications/', en: ui.en.navPublications, zh: ui.zh.navPublications },
+  { href: '/talks/', en: ui.en.navTalks, zh: ui.zh.navTalks },
+  { href: '/posts/', en: ui.en.navBlog, zh: ui.zh.navBlog },
 ];
 
 function isActive(href: string) {
@@ -19,23 +22,76 @@ function isActive(href: string) {
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">Luo's Theory Lab</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-      <span></span><span></span>
-    </button>
+    <a class="brand" href="/">
+      <Bi en={ui.en.brand} zh={ui.zh.brand} stable />
+    </a>
     <nav id="site-nav" class="nav" aria-label="Main">
       {
         links.map((link) => (
           <a href={link.href} class:list={[{ active: isActive(link.href) }]}>
-            {link.label}
+            <Bi en={link.en} zh={link.zh} stable />
           </a>
         ))
       }
     </nav>
+    <div class="header-actions">
+      <div class="prefs" role="group" aria-label="Display preferences">
+        <button
+          type="button"
+          class="pref-btn"
+          data-theme-toggle
+          aria-label={ui.en.toggleTheme}
+          title={ui.en.toggleTheme}
+        >
+          <span class="icon-sun" aria-hidden="true">☀</span>
+          <span class="icon-moon" aria-hidden="true">☾</span>
+        </button>
+        <button type="button" class="pref-btn lang-btn" data-lang-toggle aria-label={ui.en.toggleLang}>
+          <span class="bi-stable">
+            <span data-en>中文</span>
+            <span data-zh>EN</span>
+          </span>
+        </button>
+      </div>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label={ui.en.toggleNav}
+      >
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <script>
+  const root = document.documentElement;
+
+  const applyTheme = (theme: 'light' | 'dark') => {
+    root.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  };
+
+  const applyLang = (lang: 'en' | 'zh') => {
+    root.dataset.lang = lang;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    localStorage.setItem('lang', lang);
+    const title = document.querySelector('title') as HTMLElement | null;
+    if (title?.dataset.titleEn && title.dataset.titleZh) {
+      title.textContent = lang === 'zh' ? title.dataset.titleZh : title.dataset.titleEn;
+    }
+  };
+
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  document.querySelector('[data-lang-toggle]')?.addEventListener('click', () => {
+    applyLang(root.dataset.lang === 'zh' ? 'en' : 'zh');
+  });
+
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('#site-nav');
   toggle?.addEventListener('click', () => {
@@ -57,9 +113,9 @@ function isActive(href: string) {
 
   .header-inner {
     height: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
   }
 
@@ -77,21 +133,93 @@ function isActive(href: string) {
     color: var(--color-teal);
   }
 
-  .nav {
+  .header-actions {
     display: flex;
     align-items: center;
-    gap: 0.15rem 1.1rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .prefs {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .pref-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.15rem;
+    height: 2.15rem;
+    padding: 0 0.55rem;
+    border: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-ink);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .pref-btn:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+  }
+
+  .icon-sun,
+  .icon-moon {
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  :global(html[data-theme='light']) .icon-moon {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .icon-sun {
+    display: none;
+  }
+
+  .lang-btn .bi-stable {
+    display: inline-grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .lang-btn .bi-stable > :global([data-en]),
+  .lang-btn .bi-stable > :global([data-zh]) {
+    grid-area: 1 / 1;
+  }
+
+  :global(html[data-lang='en']) .lang-btn .bi-stable > :global([data-zh]),
+  :global(html[data-lang='zh']) .lang-btn .bi-stable > :global([data-en]) {
+    display: inline !important;
+    visibility: hidden;
+  }
+
+  .nav {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    min-width: 0;
+    width: 100%;
   }
 
   .nav a {
     position: relative;
+    display: inline-flex;
+    justify-content: center;
     font-size: 0.92rem;
     font-weight: 600;
     color: var(--color-muted);
     text-decoration: none;
-    padding: 0.25rem 0;
+    padding: 0.25rem 0.2rem;
+    text-align: center;
+    white-space: nowrap;
   }
 
   .nav a::after {
@@ -137,30 +265,38 @@ function isActive(href: string) {
     background: var(--color-ink);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
+    .header-inner {
+      grid-template-columns: 1fr auto;
+    }
+
     .nav-toggle {
       display: flex;
     }
 
     .nav {
       display: none;
+      grid-column: 1 / -1;
       position: absolute;
       top: var(--header-h);
       left: 0;
       right: 0;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
+      width: auto;
+      grid-auto-flow: row;
+      grid-auto-columns: unset;
+      justify-items: stretch;
       background: var(--color-paper);
       border-bottom: 1px solid var(--color-line);
       padding: 0.5rem 1rem 1rem;
     }
 
     .nav.open {
-      display: flex;
+      display: grid;
     }
 
     .nav a {
+      justify-content: flex-start;
+      width: 100%;
       padding: 0.7rem 0.25rem;
       border-bottom: 1px solid var(--color-line);
     }

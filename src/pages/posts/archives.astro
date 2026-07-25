@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Bi from '../../components/Bi.astro';
+import { ui } from '../../i18n/ui';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -15,12 +17,14 @@ const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
 const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Archive" description="Blog archive for Luo's Theory Lab.">
+<BaseLayout title="Archive" titleZh="归档" description="Blog archive for Luo's Theory Lab.">
   <div class="page">
     <div class="container-narrow">
       <header class="page-header">
-        <h1>Archive</h1>
-        <p><a href="/posts/">← Back to blog</a></p>
+        <h1><Bi en={ui.en.archive} zh={ui.zh.archive} /></h1>
+        <p>
+          <a href="/posts/"><Bi en={ui.en.backToBlog} zh={ui.zh.backToBlog} /></a>
+        </p>
       </header>
 
       {

@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PubItem from '../components/PubItem.astro';
+import Bi from '../components/Bi.astro';
+import { ui } from '../i18n/ui';
 
 const pubs = (await getCollection('publications')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -10,24 +12,24 @@ const after = pubs.filter((p) => p.data.era === 'after-njust');
 const before = pubs.filter((p) => p.data.era === 'before-njust');
 ---
 
-<BaseLayout title="Publications" description="Publications from Luo's Theory Lab.">
+<BaseLayout title="Publications" titleZh="论文" description="Publications from Luo's Theory Lab.">
   <div class="page">
     <div class="container">
       <header class="page-header">
-        <h1>Publications</h1>
+        <h1><Bi en={ui.en.navPublications} zh={ui.zh.navPublications} /></h1>
         <p>
-          Profiles:
+          <Bi en={ui.en.profiles} zh={ui.zh.profiles} />
           <a href="https://scholar.google.com/citations?hl=en&user=5byAayIAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
           ·
           <a href="https://www.webofscience.com/wos/author/record/O-3048-2018" target="_blank" rel="noopener noreferrer">Web of Science</a>
           ·
           <a href="https://orcid.org/0000-0002-3802-0029" target="_blank" rel="noopener noreferrer">ORCID</a>
         </p>
-        <p class="note">† denotes corresponding author; * denotes co-first author.</p>
+        <p class="note"><Bi en={ui.en.authorNote} zh={ui.zh.authorNote} /></p>
       </header>
 
       <section class="era">
-        <h2>After Joining NJUST</h2>
+        <h2><Bi en={ui.en.afterNjust} zh={ui.zh.afterNjust} /></h2>
         <ol class="pub-list">
           {
             after.map((pub, i) => (
@@ -50,7 +52,7 @@ const before = pubs.filter((p) => p.data.era === 'before-njust');
       </section>
 
       <section class="era">
-        <h2>Before Joining NJUST</h2>
+        <h2><Bi en={ui.en.beforeNjust} zh={ui.zh.beforeNjust} /></h2>
         <ol class="pub-list">
           {
             before.map((pub, i) => (

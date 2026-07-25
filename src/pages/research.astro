@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Bi from '../components/Bi.astro';
+import { ui } from '../i18n/ui';
 
 const themes = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 const rendered = await Promise.all(
@@ -11,11 +13,11 @@ const rendered = await Promise.all(
 );
 ---
 
-<BaseLayout title="Research" description="Research themes in Luo's Theory Lab.">
+<BaseLayout title="Research" titleZh="研究" description="Research themes in Luo's Theory Lab.">
   <div class="page">
     <div class="container-narrow">
       <header class="page-header">
-        <h1>Research</h1>
+        <h1><Bi en={ui.en.navResearch} zh={ui.zh.navResearch} /></h1>
         <p>
           Our work spans multiple levels of electronic structure theory and materials under extreme thermodynamic
           conditions.
@@ -42,7 +44,7 @@ const rendered = await Promise.all(
 <style>
   .themes {
     display: grid;
-    gap: 2.5rem;
+    gap: 2.75rem;
   }
 
   .theme {
@@ -54,13 +56,8 @@ const rendered = await Promise.all(
     border-bottom: none;
   }
 
-  .theme h2 {
-    margin: 0 0 0.5rem;
-  }
-
   .summary {
-    color: var(--color-teal-deep);
-    font-weight: 600;
-    margin: 0 0 1rem;
+    color: var(--color-muted);
+    margin-top: -0.35rem;
   }
 </style>

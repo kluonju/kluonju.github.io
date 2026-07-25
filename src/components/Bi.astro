@@ -1,0 +1,51 @@
+---
+/**
+ * Renders bilingual text. Visibility is controlled by html[data-lang].
+ * Pass stable to keep layout width when switching languages (both labels stacked).
+ */
+interface Props {
+  en: string;
+  zh: string;
+  class?: string;
+  html?: boolean;
+  stable?: boolean;
+}
+
+const { en, zh, class: className, html = false, stable = false } = Astro.props;
+const classes = [className, stable ? 'bi-stable' : null].filter(Boolean).join(' ') || undefined;
+---
+
+{
+  html ? (
+    <span class={classes}>
+      <span data-en set:html={en} />
+      <span data-zh set:html={zh} />
+    </span>
+  ) : (
+    <span class={classes}>
+      <span data-en>{en}</span>
+      <span data-zh>{zh}</span>
+    </span>
+  )
+}
+
+<style>
+  .bi-stable {
+    display: inline-grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .bi-stable > :global([data-en]),
+  .bi-stable > :global([data-zh]) {
+    grid-area: 1 / 1;
+  }
+
+  :global(html[data-lang='en']) .bi-stable > :global([data-zh]),
+  :global(html[data-lang='zh']) .bi-stable > :global([data-en]) {
+    display: inline !important;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+</style>

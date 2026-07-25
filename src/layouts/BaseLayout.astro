@@ -9,26 +9,50 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
+  titleZh?: string;
   description?: string;
 }
 
 const {
   title = "Luo's Theory Lab",
+  titleZh = '罗凯理论实验室',
   description = 'Computational electronic structure theory across orbital-free DFT, Kohn–Sham DFT, and reduced density matrix methods.',
 } = Astro.props;
 
-const pageTitle = title === "Luo's Theory Lab" ? title : `${title} · Luo's Theory Lab`;
+const pageTitleEn = title === "Luo's Theory Lab" ? title : `${title} · Luo's Theory Lab`;
+const pageTitleZh = titleZh === '罗凯理论实验室' ? titleZh : `${titleZh} · 罗凯理论实验室`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{pageTitle}</title>
+    <title data-title-en={pageTitleEn} data-title-zh={pageTitleZh}>{pageTitleEn}</title>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const storedTheme = localStorage.getItem('theme');
+        const theme =
+          storedTheme === 'light' || storedTheme === 'dark'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        const storedLang = localStorage.getItem('lang');
+        const lang = storedLang === 'zh' ? 'zh' : 'en';
+        root.dataset.theme = theme;
+        root.dataset.lang = lang;
+        root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        const title = document.querySelector('title');
+        if (title) {
+          title.textContent = lang === 'zh' ? title.dataset.titleZh || title.textContent : title.dataset.titleEn || title.textContent;
+        }
+      })();
+    </script>
   </head>
   <body>
     <Header />

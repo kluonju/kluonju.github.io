@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PersonCard from '../components/PersonCard.astro';
+import Bi from '../components/Bi.astro';
+import { ui } from '../i18n/ui';
 
 const people = await getCollection('people');
 const sorted = people.sort((a, b) => a.data.order - b.data.order);
@@ -12,16 +14,16 @@ const undergrad = sorted.filter((p) => p.data.role === 'undergrad' && p.data.act
 const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
 ---
 
-<BaseLayout title="People" description="Members and alumni of Luo's Theory Lab.">
+<BaseLayout title="People" titleZh="成员" description="Members and alumni of Luo's Theory Lab.">
   <div class="page">
     <div class="container">
       <header class="page-header">
-        <h1>Group Members</h1>
+        <h1><Bi en={ui.en.groupMembers} zh={ui.zh.groupMembers} /></h1>
         <p>Researchers developing electronic structure methods and applications under extreme conditions.</p>
       </header>
 
       <section class="block">
-        <h2>Principal Investigator</h2>
+        <h2><Bi en={ui.en.rolePi} zh={ui.zh.rolePi} /></h2>
         <div class="stack">
           {
             pi.map((person) => (
@@ -40,7 +42,7 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
       </section>
 
       <section class="block">
-        <h2>Graduate</h2>
+        <h2><Bi en={ui.en.roleGraduate} zh={ui.zh.roleGraduate} /></h2>
         <div class="stack">
           {
             graduate.map((person) => (
@@ -59,7 +61,7 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
       </section>
 
       <section class="block">
-        <h2>Undergraduate</h2>
+        <h2><Bi en={ui.en.roleUndergrad} zh={ui.zh.roleUndergrad} /></h2>
         <div class="stack">
           {
             undergrad.map((person) => (
@@ -78,20 +80,18 @@ const alumni = sorted.filter((p) => p.data.role === 'alumni' || !p.data.active);
       </section>
 
       <section class="block">
-        <h2>Alumni</h2>
+        <h2><Bi en={ui.en.roleAlumni} zh={ui.zh.roleAlumni} /></h2>
         <ul class="alumni">
           {
             alumni.map((person) => (
               <li>
                 <strong>
-                  {person.data.nameZh ?? person.data.name}
-                  {person.data.nameZh && person.data.name ? ` (${person.data.name})` : ''}
+                  {person.data.name}
+                  {person.data.nameZh ? `（${person.data.nameZh}）` : ''}
                 </strong>
                 {person.data.years && <> ({person.data.years})</>}
                 {person.data.destination && <> — {person.data.destination}</>}
-                {person.data.thesis && (
-                  <div class="thesis">论文《{person.data.thesis}》</div>
-                )}
+                {person.data.thesis && <div class="thesis">Thesis: {person.data.thesis}</div>}
               </li>
             ))
           }

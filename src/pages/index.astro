@@ -5,6 +5,8 @@ import PersonCard from '../components/PersonCard.astro';
 import PubBanner from '../components/PubBanner.astro';
 import PubItem from '../components/PubItem.astro';
 import ResearchCard from '../components/ResearchCard.astro';
+import Bi from '../components/Bi.astro';
+import { ui } from '../i18n/ui';
 
 const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 const people = (await getCollection('people'))
@@ -28,26 +30,29 @@ const recentPubs = (await getCollection('publications'))
 
 <BaseLayout
   title="Luo's Theory Lab"
+  titleZh="罗凯理论实验室"
   description="Computational electronic structure theory — orbital-free DFT, Kohn–Sham DFT, and reduced density matrix methods under extreme conditions."
 >
   <PubBanner slides={bannerSlides} />
 
   <section class="section mission reveal">
     <div class="container">
-      <p class="section-label">Mission</p>
+      <p class="section-label"><Bi en={ui.en.mission} zh={ui.zh.mission} /></p>
       <h2>Accuracy where electronic interactions matter</h2>
       <p class="mission-text">
         We leverage computational power to solve problems dominated by electronic interactions. Because of the
         many-body fermionic nature of electrons, these problems must be approached approximately—choosing a level of
         theory that balances accuracy with feasible time and resources.
       </p>
-      <a class="btn btn-outline" href="/about/">About the lab</a>
+      <a class="btn btn-outline" href="/about/">
+        <Bi en={ui.en.aboutLab} zh={ui.zh.aboutLab} />
+      </a>
     </div>
   </section>
 
   <section class="section research-section reveal">
     <div class="container">
-      <p class="section-label">Research</p>
+      <p class="section-label"><Bi en={ui.en.research} zh={ui.zh.research} /></p>
       <h2>Themes that define the group</h2>
       <div class="research-grid">
         {
@@ -63,10 +68,12 @@ const recentPubs = (await getCollection('publications'))
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="section-label">People</p>
+          <p class="section-label"><Bi en={ui.en.people} zh={ui.zh.people} /></p>
           <h2>Current group</h2>
         </div>
-        <a class="btn btn-outline" href="/people/">All members</a>
+        <a class="btn btn-outline" href="/people/">
+          <Bi en={ui.en.allMembers} zh={ui.zh.allMembers} />
+        </a>
       </div>
       <div class="people-grid">
         {
@@ -90,10 +97,12 @@ const recentPubs = (await getCollection('publications'))
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="section-label">Publications</p>
+          <p class="section-label"><Bi en={ui.en.publications} zh={ui.zh.publications} /></p>
           <h2>Selected recent work</h2>
         </div>
-        <a class="btn btn-outline" href="/publications/">Full list</a>
+        <a class="btn btn-outline" href="/publications/">
+          <Bi en={ui.en.fullList} zh={ui.zh.fullList} />
+        </a>
       </div>
       <ol class="pub-list">
         {
@@ -118,16 +127,20 @@ const recentPubs = (await getCollection('publications'))
   <section class="section more-section reveal">
     <div class="container more-grid">
       <div>
-        <p class="section-label">Teaching</p>
+        <p class="section-label"><Bi en={ui.en.teaching} zh={ui.zh.teaching} /></p>
         <h2>Mathematical methods in physics</h2>
         <p>Course materials for 数学物理方法, including Fall 2024 lectures and homework.</p>
-        <a href="/teaching/">Teaching hub →</a>
+        <a href="/teaching/">
+          <Bi en={ui.en.teachingHub} zh={ui.zh.teachingHub} />
+        </a>
       </div>
       <div>
-        <p class="section-label">Blog</p>
+        <p class="section-label"><Bi en={ui.en.blog} zh={ui.zh.blog} /></p>
         <h2>Notes from the lab</h2>
         <p>Software install diaries and computational workflow notes for scientific codes.</p>
-        <a href="/posts/">Read the blog →</a>
+        <a href="/posts/">
+          <Bi en={ui.en.readBlog} zh={ui.zh.readBlog} />
+        </a>
       </div>
     </div>
   </section>

@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Bi from '../components/Bi.astro';
+import { ui } from '../i18n/ui';
 ---
 
-<BaseLayout title="About" description="About Luo's Theory Lab and our approaches to electronic structure theory.">
+<BaseLayout title="About" titleZh="关于" description="About Luo's Theory Lab and our approaches to electronic structure theory.">
   <div class="page">
     <div class="container-narrow">
       <header class="page-header">
-        <h1>About</h1>
+        <h1><Bi en={ui.en.navAbout} zh={ui.zh.navAbout} /></h1>
       </header>
       <div class="prose">
         <p>
