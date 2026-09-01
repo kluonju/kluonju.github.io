@@ -51,6 +51,10 @@ export const ui = {
     talksInvited: 'Invited',
     talksContributed: 'Contributed',
     talksAbstract: 'Abstract',
+    teachingPasscodePrompt: 'Enter the course passcode to view notes and assignments.',
+    teachingPasscode: 'Course passcode',
+    teachingUnlock: 'Unlock',
+    teachingPasscodeError: 'That passcode did not work. Try again, or ask the instructor.',
   },
   zh: {
     brand: '罗凯理论实验室',
@@ -103,6 +107,10 @@ export const ui = {
     talksInvited: '特邀报告',
     talksContributed: '会议报告',
     talksAbstract: '摘要',
+    teachingPasscodePrompt: '请输入课程口令以查看讲义和作业。',
+    teachingPasscode: '课程口令',
+    teachingUnlock: '解锁',
+    teachingPasscodeError: '口令不正确。请重试，或联系任课教师。',
   },
 } as const;
 

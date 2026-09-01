@@ -98,6 +98,7 @@ const teaching = defineCollection({
     semester: z.string().optional(),
     description: z.string().optional(),
     order: z.number().default(100),
+    protected: z.boolean().default(false),
   }),
 });
 

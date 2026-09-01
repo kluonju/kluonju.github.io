@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "encrypt:teaching": "node scripts/encrypt-teaching.mjs"
   },
   "dependencies": {
     "@fontsource/source-sans-3": "^5.2.8",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@types/three": "^0.185.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "marked": "^15.0.12"
   }
 }

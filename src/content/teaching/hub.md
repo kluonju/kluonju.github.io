@@ -9,4 +9,4 @@ Welcome to the course **数学物理方法**. Here you will find resources inclu
 
 ## Semesters
 
-- [Fall 2024](/teaching/fall-2024/)
+- [Fall 2026](/teaching/fall-2026/)

@@ -10,3 +10,6 @@ npm-debug.log*
 .env
 .env.*
 .DS_Store
+
+# cleartext course materials (encrypted copies live in public/)
+private/

@@ -1,0 +1,41 @@
+{
+  "course": "fall-2026",
+  "salt": "bCmc6Vp1Px3BEfXlQ9viLQ==",
+  "iterations": 310000,
+  "hash": "SHA-256",
+  "contentFile": "content.bin.enc",
+  "files": [
+    {
+      "name": "hw1.pdf",
+      "enc": "hw1.pdf.enc"
+    },
+    {
+      "name": "hw2.pdf",
+      "enc": "hw2.pdf.enc"
+    },
+    {
+      "name": "hw3.pdf",
+      "enc": "hw3.pdf.enc"
+    },
+    {
+      "name": "lecture01.pdf",
+      "enc": "lecture01.pdf.enc"
+    },
+    {
+      "name": "lecture02.pdf",
+      "enc": "lecture02.pdf.enc"
+    },
+    {
+      "name": "lecture03.pdf",
+      "enc": "lecture03.pdf.enc"
+    },
+    {
+      "name": "pre.pdf",
+      "enc": "pre.pdf.enc"
+    },
+    {
+      "name": "syllabus_2026.pdf",
+      "enc": "syllabus_2026.pdf.enc"
+    }
+  ]
+}

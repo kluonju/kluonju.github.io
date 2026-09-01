@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Bi from '../../components/Bi.astro';
+import { ui } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   const courses = (await getCollection('teaching')).filter((t) => t.id !== 'hub');
@@ -11,7 +13,8 @@ export async function getStaticPaths() {
 }
 
 const { course } = Astro.props;
-const { Content } = await render(course);
+const locked = course.data.protected;
+const { Content } = locked ? { Content: null } : await render(course);
 ---
 
 <BaseLayout title={course.data.title} description={course.data.description ?? course.data.title}>
@@ -22,12 +25,156 @@ const { Content } = await render(course);
         <h1>{course.data.title}</h1>
         {course.data.description && <p>{course.data.description}</p>}
       </header>
-      <div class="prose">
-        <Content />
-      </div>
+
+      {
+        locked ? (
+          <div class="gate" data-teaching-gate data-course={course.id}>
+            <form class="gate-form" data-gate-form>
+              <p class="gate-lede">
+                <Bi en={ui.en.teachingPasscodePrompt} zh={ui.zh.teachingPasscodePrompt} />
+              </p>
+              <label class="sr-only" for={`pass-${course.id}`}>
+                <Bi en={ui.en.teachingPasscode} zh={ui.zh.teachingPasscode} />
+              </label>
+              <div class="gate-row">
+                <input
+                  id={`pass-${course.id}`}
+                  class="gate-input"
+                  type="password"
+                  name="passcode"
+                  autocomplete="current-password"
+                  required
+                />
+                <button class="btn btn-primary" type="submit">
+                  <Bi en={ui.en.teachingUnlock} zh={ui.zh.teachingUnlock} />
+                </button>
+              </div>
+              <p class="gate-error" data-gate-error hidden>
+                <Bi en={ui.en.teachingPasscodeError} zh={ui.zh.teachingPasscodeError} />
+              </p>
+            </form>
+            <div class="prose" data-gate-content hidden></div>
+          </div>
+        ) : (
+          <div class="prose">
+            <Content />
+          </div>
+        )
+      }
     </div>
   </div>
 </BaseLayout>
+
+{
+  locked && (
+    <script>
+      import { decryptBytes, decryptText, deriveKey } from '../../scripts/teaching-crypto';
+
+      type GateMeta = {
+        course: string;
+        salt: string;
+        iterations: number;
+        contentFile: string;
+        files: { name: string; enc: string }[];
+      };
+
+      const root = document.querySelector<HTMLElement>('[data-teaching-gate]');
+      if (root) {
+        const course = root.dataset.course || '';
+        const form = root.querySelector<HTMLFormElement>('[data-gate-form]');
+        const errorEl = root.querySelector<HTMLElement>('[data-gate-error]');
+        const contentEl = root.querySelector<HTMLElement>('[data-gate-content]');
+        const base = `/teaching/${course}/`;
+        let key: CryptoKey | null = null;
+        let blobUrls: string[] = [];
+
+        const storageKey = (salt: string) => `teaching-gate:${course}:${salt}`;
+
+        const showError = (on: boolean) => {
+          if (!errorEl) return;
+          errorEl.hidden = !on;
+        };
+
+        const openPdf = async (encName: string, filename: string) => {
+          if (!key) return;
+          const packed = await fetch(`${base}${encName}`).then((r) => {
+            if (!r.ok) throw new Error('missing file');
+            return r.arrayBuffer();
+          });
+          const plain = await decryptBytes(packed, key);
+          const url = URL.createObjectURL(new Blob([new Uint8Array(plain)], { type: 'application/pdf' }));
+          blobUrls.push(url);
+          const a = document.createElement('a');
+          a.href = url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.download = filename;
+          a.click();
+        };
+
+        const bindLinks = () => {
+          if (!contentEl) return;
+          contentEl.querySelectorAll<HTMLAnchorElement>('a[data-enc-src]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              const enc = link.dataset.encSrc;
+              if (!enc) return;
+              const filename = enc.replace(/\.enc$/, '');
+              void openPdf(enc, filename).catch(() => showError(true));
+            });
+          });
+        };
+
+        const reveal = (html: string) => {
+          if (!contentEl || !form) return;
+          contentEl.innerHTML = html;
+          contentEl.hidden = false;
+          form.hidden = true;
+          showError(false);
+          bindLinks();
+        };
+
+        const unlock = async (passcode: string, persist: boolean) => {
+          const meta: GateMeta = await fetch(`${base}gate.json`).then((r) => {
+            if (!r.ok) throw new Error('missing gate');
+            return r.json();
+          });
+          const nextKey = await deriveKey(passcode, meta.salt, meta.iterations);
+          const packed = await fetch(`${base}${meta.contentFile}`).then((r) => {
+            if (!r.ok) throw new Error('missing content');
+            return r.arrayBuffer();
+          });
+          const html = await decryptText(packed, nextKey);
+          key = nextKey;
+          if (persist) sessionStorage.setItem(storageKey(meta.salt), passcode);
+          reveal(html);
+        };
+
+        form?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const passcode = new FormData(form).get('passcode');
+          if (typeof passcode !== 'string' || !passcode) return;
+          showError(false);
+          void unlock(passcode, true).catch(() => showError(true));
+        });
+
+        window.addEventListener('pagehide', () => {
+          blobUrls.forEach((url) => URL.revokeObjectURL(url));
+          blobUrls = [];
+        });
+
+        void fetch(`${base}gate.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((meta: GateMeta | null) => {
+            if (!meta) return;
+            const saved = sessionStorage.getItem(storageKey(meta.salt));
+            if (saved) return unlock(saved, false);
+          })
+          .catch(() => undefined);
+      }
+    </script>
+  )
+}
 
 <style>
   .crumb {
@@ -39,5 +186,47 @@ const { Content } = await render(course);
   .crumb a {
     text-decoration: none;
     font-weight: 600;
+  }
+
+  .gate-lede {
+    margin: 0 0 0.85rem;
+    color: var(--color-muted);
+  }
+
+  .gate-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .gate-input {
+    min-width: min(18rem, 100%);
+    height: 2.4rem;
+    padding: 0 0.7rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .gate-error {
+    margin: 0.75rem 0 0;
+    color: #b42318;
+    font-size: 0.92rem;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>
