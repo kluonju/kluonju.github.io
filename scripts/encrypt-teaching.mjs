@@ -1,5 +1,6 @@
 import { createCipheriv, pbkdf2, randomBytes } from 'node:crypto';
-import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { readFileSync, watch } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
@@ -12,14 +13,37 @@ const IV_LEN = 12;
 const SALT_LEN = 16;
 const DEFAULT_PASSCODE = 'mathphys2026';
 
-const privateDir = path.join(root, 'private', 'teaching', COURSE);
 const publicDir = path.join(root, 'public', 'teaching', COURSE);
 const markdownPath = path.join(root, 'src', 'content', 'teaching', `${COURSE}.md`);
+const envPath = path.join(root, '.env');
+const gatePath = path.join(publicDir, 'gate.json');
+
+function loadDotenv() {
+  try {
+    const raw = readFileSync(envPath, 'utf8');
+    for (const line of raw.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq < 1) continue;
+      const key = trimmed.slice(0, eq).trim();
+      let value = trimmed.slice(eq + 1).trim();
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1);
+      }
+      if (key && process.env[key] === undefined) process.env[key] = value;
+    }
+  } catch {
+    /* no .env */
+  }
+}
 
 function loadPasscode() {
-  const fromEnv = process.env.TEACHING_PASSCODE?.trim();
-  if (fromEnv) return fromEnv;
-  return DEFAULT_PASSCODE;
+  loadDotenv();
+  return process.env.TEACHING_PASSCODE?.trim() || DEFAULT_PASSCODE;
 }
 
 function deriveKey(passcode, salt) {
@@ -44,44 +68,27 @@ function extractFrontmatter(raw) {
   return { body: match[2].trimStart() };
 }
 
-function rewritePdfHrefs(html, files) {
-  const names = new Set(files.map((f) => f.name));
-  return html.replace(/href="(\/teaching\/fall-2026\/([^"]+))"/g, (full, href, name) => {
-    if (!names.has(name)) return full;
-    return `href="${href}" data-enc-src="${name}.enc"`;
-  });
+async function loadOrMakeSalt() {
+  try {
+    const existing = JSON.parse(await readFile(gatePath, 'utf8'));
+    if (typeof existing.salt === 'string' && existing.iterations === ITERATIONS) {
+      return Buffer.from(existing.salt, 'base64');
+    }
+  } catch {
+    /* first run */
+  }
+  return randomBytes(SALT_LEN);
 }
 
-async function main() {
+export async function encryptTeaching({ quiet = false } = {}) {
   const passcode = loadPasscode();
-  if (!process.env.TEACHING_PASSCODE?.trim()) {
-    console.warn(`TEACHING_PASSCODE unset; using default "${DEFAULT_PASSCODE}".`);
-  }
-
-  const entries = (await readdir(privateDir)).filter((name) => name.endsWith('.pdf'));
-  if (!entries.length) {
-    throw new Error(`No PDFs found in ${privateDir}`);
-  }
-
-  await rm(publicDir, { recursive: true, force: true });
   await mkdir(publicDir, { recursive: true });
-
-  const salt = randomBytes(SALT_LEN);
+  const salt = await loadOrMakeSalt();
   const key = await deriveKey(passcode, salt);
-
-  const files = [];
-  for (const name of entries.sort()) {
-    const plain = await readFile(path.join(privateDir, name));
-    await writeFile(path.join(publicDir, `${name}.enc`), encryptBuffer(plain, key));
-    files.push({
-      name,
-      enc: `${name}.enc`,
-    });
-  }
 
   const rawMd = await readFile(markdownPath, 'utf8');
   const { body } = extractFrontmatter(rawMd);
-  const html = rewritePdfHrefs(await marked.parse(body, { gfm: true }), files);
+  const html = await marked.parse(body, { gfm: true });
   await writeFile(path.join(publicDir, 'content.bin.enc'), encryptBuffer(Buffer.from(html, 'utf8'), key));
 
   const gate = {
@@ -90,13 +97,44 @@ async function main() {
     iterations: ITERATIONS,
     hash: 'SHA-256',
     contentFile: 'content.bin.enc',
-    files,
   };
-  await writeFile(path.join(publicDir, 'gate.json'), `${JSON.stringify(gate, null, 2)}\n`);
-  console.log(`Encrypted ${files.length} PDFs + page HTML → public/teaching/${COURSE}/`);
+  await writeFile(gatePath, `${JSON.stringify(gate, null, 2)}\n`);
+  if (!quiet) console.log('[teaching] encrypted page HTML');
+  return { skipped: false };
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+export function encryptTeachingIntegration() {
+  let debounce;
+  const run = (quiet) => encryptTeaching({ quiet }).catch((err) => console.error('[teaching]', err));
+
+  return {
+    name: 'encrypt-teaching',
+    hooks: {
+      'astro:config:setup': async () => {
+        await run(false);
+      },
+      'astro:server:setup': ({ server }) => {
+        const reload = () => {
+          clearTimeout(debounce);
+          debounce = setTimeout(() => {
+            void run(true).then((result) => {
+              if (result && !result.skipped) {
+                const payload = { type: 'full-reload' };
+                server.hot?.send(payload);
+                server.ws?.send(payload);
+              }
+            });
+          }, 150);
+        };
+        watch(path.dirname(markdownPath), reload);
+      },
+    },
+  };
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  encryptTeaching().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

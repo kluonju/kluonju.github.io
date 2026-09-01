@@ -68,14 +68,13 @@ const { Content } = locked ? { Content: null } : await render(course);
 {
   locked && (
     <script>
-      import { decryptBytes, decryptText, deriveKey } from '../../scripts/teaching-crypto';
+      import { decryptText, deriveKey } from '../../scripts/teaching-crypto';
 
       type GateMeta = {
         course: string;
         salt: string;
         iterations: number;
         contentFile: string;
-        files: { name: string; enc: string }[];
       };
 
       const root = document.querySelector<HTMLElement>('[data-teaching-gate]');
@@ -85,8 +84,6 @@ const { Content } = locked ? { Content: null } : await render(course);
         const errorEl = root.querySelector<HTMLElement>('[data-gate-error]');
         const contentEl = root.querySelector<HTMLElement>('[data-gate-content]');
         const base = `/teaching/${course}/`;
-        let key: CryptoKey | null = null;
-        let blobUrls: string[] = [];
 
         const storageKey = (salt: string) => `teaching-gate:${course}:${salt}`;
 
@@ -95,43 +92,12 @@ const { Content } = locked ? { Content: null } : await render(course);
           errorEl.hidden = !on;
         };
 
-        const openPdf = async (encName: string, filename: string) => {
-          if (!key) return;
-          const packed = await fetch(`${base}${encName}`).then((r) => {
-            if (!r.ok) throw new Error('missing file');
-            return r.arrayBuffer();
-          });
-          const plain = await decryptBytes(packed, key);
-          const url = URL.createObjectURL(new Blob([new Uint8Array(plain)], { type: 'application/pdf' }));
-          blobUrls.push(url);
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.download = filename;
-          a.click();
-        };
-
-        const bindLinks = () => {
-          if (!contentEl) return;
-          contentEl.querySelectorAll<HTMLAnchorElement>('a[data-enc-src]').forEach((link) => {
-            link.addEventListener('click', (e) => {
-              e.preventDefault();
-              const enc = link.dataset.encSrc;
-              if (!enc) return;
-              const filename = enc.replace(/\.enc$/, '');
-              void openPdf(enc, filename).catch(() => showError(true));
-            });
-          });
-        };
-
         const reveal = (html: string) => {
           if (!contentEl || !form) return;
           contentEl.innerHTML = html;
           contentEl.hidden = false;
           form.hidden = true;
           showError(false);
-          bindLinks();
         };
 
         const unlock = async (passcode: string, persist: boolean) => {
@@ -145,7 +111,6 @@ const { Content } = locked ? { Content: null } : await render(course);
             return r.arrayBuffer();
           });
           const html = await decryptText(packed, nextKey);
-          key = nextKey;
           if (persist) sessionStorage.setItem(storageKey(meta.salt), passcode);
           reveal(html);
         };
@@ -156,11 +121,6 @@ const { Content } = locked ? { Content: null } : await render(course);
           if (typeof passcode !== 'string' || !passcode) return;
           showError(false);
           void unlock(passcode, true).catch(() => showError(true));
-        });
-
-        window.addEventListener('pagehide', () => {
-          blobUrls.forEach((url) => URL.revokeObjectURL(url));
-          blobUrls = [];
         });
 
         void fetch(`${base}gate.json`)

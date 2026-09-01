@@ -31,12 +31,9 @@ Content lives in `src/content/` (people, publications, research, teaching, talks
 
 ## Protected teaching notes
 
-Fall 2026 course PDFs are encrypted. Cleartext files stay in `private/teaching/fall-2026/` (gitignored). The public site only has ciphertext under `public/teaching/fall-2026/`.
+The Fall 2026 teaching **page** is passcode-gated. Lecture/homework PDFs in `public/teaching/fall-2026/` are ordinary files — anyone with the URL can open them.
 
-To update notes:
+Edit `src/content/teaching/fall-2026.md` as usual. `npm run dev` and `npm run build` encrypt the page HTML automatically. Commit PDFs plus `content.bin.enc` / `gate.json`.
 
-1. Edit files in `private/teaching/fall-2026/`.
-2. Set `TEACHING_PASSCODE` (or use the default `mathphys2026`).
-3. Run `npm run encrypt:teaching`.
-4. Commit the new `public/teaching/fall-2026/` artifacts (`gate.json` and `*.enc`).
+Passcode: `TEACHING_PASSCODE` in `.env`, or the default `mathphys2026`.
 
